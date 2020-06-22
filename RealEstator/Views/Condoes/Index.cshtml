@@ -1,0 +1,75 @@
+﻿@model IEnumerable<RealEstator.Models.Condo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SquareFootage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasPool)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsWaterfront)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Occupied)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearBuilt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SquareFootage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasPool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsWaterfront)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Occupied)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearBuilt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CondoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CondoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CondoID })
+        </td>
+    </tr>
+}
+
+</table>

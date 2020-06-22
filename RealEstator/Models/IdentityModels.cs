@@ -29,5 +29,11 @@ namespace RealEstator.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<RealEstator.Models.Home> Homes { get; set; }
+
+        public System.Data.Entity.DbSet<RealEstator.Models.Condo> Condoes { get; set; }
+
+        public System.Data.Entity.DbSet<RealEstator.Models.Townhouse> Townhouses { get; set; }
     }
 }

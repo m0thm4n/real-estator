@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RealEstator.Models.Home>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beds)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Baths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SquareFootage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasPool)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Occupied)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Beds)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Baths)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SquareFootage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HasPool)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Occupied)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.HomeID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.HomeID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.HomeID })
+    </td>
+</tr>
+}
+
+</table>

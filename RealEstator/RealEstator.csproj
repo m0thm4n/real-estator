@@ -55,7 +55,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.ComponentModel.DataAnnotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
@@ -171,16 +173,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CondoesController.cs" />
+    <Compile Include="Controllers\HomesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TownhousesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006222257501_InitialCreate.cs" />
+    <Compile Include="Migrations\202006222257501_InitialCreate.Designer.cs">
+      <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Condo.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Townhouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -244,6 +254,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Homes\Create.cshtml" />
+    <Content Include="Views\Homes\Delete.cshtml" />
+    <Content Include="Views\Homes\Details.cshtml" />
+    <Content Include="Views\Homes\Edit.cshtml" />
+    <Content Include="Views\Homes\Index.cshtml" />
+    <Content Include="Views\Condoes\Create.cshtml" />
+    <Content Include="Views\Condoes\Delete.cshtml" />
+    <Content Include="Views\Condoes\Details.cshtml" />
+    <Content Include="Views\Condoes\Edit.cshtml" />
+    <Content Include="Views\Condoes\Index.cshtml" />
+    <Content Include="Views\Townhouses\Create.cshtml" />
+    <Content Include="Views\Townhouses\Delete.cshtml" />
+    <Content Include="Views\Townhouses\Details.cshtml" />
+    <Content Include="Views\Townhouses\Edit.cshtml" />
+    <Content Include="Views\Townhouses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -260,6 +285,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006222257501_InitialCreate.resx">
+      <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

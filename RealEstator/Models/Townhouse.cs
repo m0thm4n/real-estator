@@ -6,10 +6,10 @@ using System.Web;
 
 namespace RealEstator.Models
 {
-    public class Home
+    public class Townhouse
     {
         [Key]
-        public int HomeID { get; set; }
+        public int TownhouseID { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
