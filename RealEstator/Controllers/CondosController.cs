@@ -10,14 +10,14 @@ using RealEstator.Models;
 
 namespace RealEstator.Controllers
 {
-    public class CondoesController : Controller
+    public class CondosController : Controller
     {
-        private ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Condoes
         public ActionResult Index()
         {
-            return View(_context.Condoes.ToList());
+            return View(_db.Condos.ToList());
         }
 
         // GET: Condoes/Details/5
@@ -27,7 +27,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _db.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -50,8 +50,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Condoes.Add(condo);
-                _context.SaveChanges();
+                _db.Condos.Add(condo);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _db.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -82,8 +82,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(condo).State = EntityState.Modified;
-                _context.SaveChanges();
+                _db.Entry(condo).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(condo);
@@ -96,7 +96,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _db.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,9 @@ namespace RealEstator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Condo condo = _context.Condoes.Find(id);
-            _context.Condoes.Remove(condo);
-            _context.SaveChanges();
+            Condo condo = _db.Condos.Find(id);
+            _db.Condos.Remove(condo);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,8 +119,8 @@ namespace RealEstator.Controllers
         {
             if (disposing)
             {
-                _context.Dispose();
-                _context.Dispose();
+                _db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

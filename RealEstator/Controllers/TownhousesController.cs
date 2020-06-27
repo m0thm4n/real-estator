@@ -12,12 +12,12 @@ namespace RealEstator.Controllers
 {
     public class TownhousesController : Controller
     {
-        private ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Townhouses
         public ActionResult Index()
         {
-            return View(_context.Townhouses.ToList());
+            return View(_db.Townhouses.ToList());
         }
 
         // GET: Townhouses/Details/5
@@ -27,7 +27,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Townhouse townhouse = _context.Townhouses.Find(id);
+            Townhouse townhouse = _db.Townhouses.Find(id);
             if (townhouse == null)
             {
                 return HttpNotFound();
@@ -50,8 +50,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Townhouses.Add(townhouse);
-                _context.SaveChanges();
+                _db.Townhouses.Add(townhouse);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Townhouse townhouse = _context.Townhouses.Find(id);
+            Townhouse townhouse = _db.Townhouses.Find(id);
             if (townhouse == null)
             {
                 return HttpNotFound();
@@ -82,8 +82,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(townhouse).State = EntityState.Modified;
-                _context.SaveChanges();
+                _db.Entry(townhouse).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(townhouse);
@@ -96,7 +96,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Townhouse townhouse = _context.Townhouses.Find(id);
+            Townhouse townhouse = _db.Townhouses.Find(id);
             if (townhouse == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,9 @@ namespace RealEstator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Townhouse townhouse = _context.Townhouses.Find(id);
-            _context.Townhouses.Remove(townhouse);
-            _context.SaveChanges();
+            Townhouse townhouse = _db.Townhouses.Find(id);
+            _db.Townhouses.Remove(townhouse);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +119,7 @@ namespace RealEstator.Controllers
         {
             if (disposing)
             {
-                _context.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
