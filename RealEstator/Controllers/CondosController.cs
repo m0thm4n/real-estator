@@ -10,14 +10,14 @@ using RealEstator.Models;
 
 namespace RealEstator.Controllers
 {
-    public class CondoesController : Controller
+    public class CondosController : Controller
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
 
         // GET: Condoes
         public ActionResult Index()
         {
-            return View(_context.Condoes.ToList());
+            return View(_context.Condos.ToList());
         }
 
         // GET: Condoes/Details/5
@@ -27,7 +27,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _context.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Condoes.Add(condo);
+                _context.Condos.Add(condo);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _context.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _context.Condoes.Find(id);
+            Condo condo = _context.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace RealEstator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Condo condo = _context.Condoes.Find(id);
-            _context.Condoes.Remove(condo);
+            Condo condo = _context.Condos.Find(id);
+            _context.Condos.Remove(condo);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
