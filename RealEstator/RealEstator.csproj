@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202006222257501_InitialCreate.Designer.cs">
       <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006302245330_InitialSeed.cs" />
+    <Compile Include="Migrations\202006302245330_InitialSeed.Designer.cs">
+      <DependentUpon>202006302245330_InitialSeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Condo.cs" />
@@ -259,6 +263,10 @@
     <Content Include="Views\Homes\Details.cshtml" />
     <Content Include="Views\Homes\Edit.cshtml" />
     <Content Include="Views\Homes\Index.cshtml" />
+    <Content Include="Views\Condos\Delete.cshtml" />
+    <Content Include="Views\Condos\Details.cshtml" />
+    <Content Include="Views\Condos\Edit.cshtml" />
+    <Content Include="Views\Condos\Index.cshtml" />
     <Content Include="Views\Townhouses\Create.cshtml" />
     <Content Include="Views\Townhouses\Delete.cshtml" />
     <Content Include="Views\Townhouses\Details.cshtml" />
@@ -289,6 +297,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202006222257501_InitialCreate.resx">
       <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006302245330_InitialSeed.resx">
+      <DependentUpon>202006302245330_InitialSeed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
