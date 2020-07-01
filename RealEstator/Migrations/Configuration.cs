@@ -1,11 +1,12 @@
+using Microsoft.Owin.BuilderProperties;
+using RealEstator.Models;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+
 namespace RealEstator.Migrations
 {
-    using Microsoft.Owin.BuilderProperties;
-    using RealEstator.Models;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RealEstator.Models.ApplicationDbContext>
     {
@@ -34,6 +35,36 @@ namespace RealEstator.Migrations
                     Occupied = true,
                     YearBuilt = 1900,
                     Price = 100,
+                });
+
+            context.Homes.AddOrUpdate(x => x.HomeID,
+                new Home()
+                {
+                    HomeID = 1,
+                    Address = "123 Test Ave",
+                    Beds = 2,
+                    Baths = 2,
+                    SquareFootage = 1050,
+                    HasPool = true,
+                    IsWaterfront = false,
+                    Occupied = false,
+                    YearBuilt = 1990,
+                    Price = 500,
+                });
+
+            context.Townhouses.AddOrUpdate(x => x.TownhouseID,
+                new Townhouse()
+                {
+                    TownhouseID = 1,
+                    Address = "123 Test Ave",
+                    Beds = 2,
+                    Baths = 1,
+                    SquareFootage = 860,
+                    HasPool = true,
+                    IsWaterfront = true,
+                    Occupied = true,
+                    YearBuilt = 2001,
+                    Price = 1050,
                 });
         }
     }
