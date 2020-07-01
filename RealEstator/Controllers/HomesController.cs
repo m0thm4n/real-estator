@@ -12,12 +12,12 @@ namespace RealEstator.Controllers
 {
     public class HomesController : Controller
     {
-        private ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Homes
         public ActionResult Index()
         {
-            return View(_context.Homes.ToList());
+            return View(_db.Homes.ToList());
         }
 
         // GET: Homes/Details/5
@@ -27,7 +27,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _context.Homes.Find(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -50,8 +50,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Homes.Add(home);
-                _context.SaveChanges();
+                _db.Homes.Add(home);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _context.Homes.Find(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -82,8 +82,8 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(home).State = EntityState.Modified;
-                _context.SaveChanges();
+                _db.Entry(home).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(home);
@@ -96,7 +96,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _context.Homes.Find(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,9 @@ namespace RealEstator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Home home = _context.Homes.Find(id);
-            _context.Homes.Remove(home);
-            _context.SaveChanges();
+            Home home = _db.Homes.Find(id);
+            _db.Homes.Remove(home);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +119,7 @@ namespace RealEstator.Controllers
         {
             if (disposing)
             {
-                _context.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

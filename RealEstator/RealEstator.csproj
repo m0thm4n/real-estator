@@ -273,6 +273,10 @@
     <Content Include="Views\Townhouses\Edit.cshtml" />
     <Content Include="Views\Townhouses\Index.cshtml" />
     <Content Include="Views\Condos\Create.cshtml" />
+    <Content Include="Views\Condos\Delete.cshtml" />
+    <Content Include="Views\Condos\Details.cshtml" />
+    <Content Include="Views\Condos\Edit.cshtml" />
+    <Content Include="Views\Condos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
