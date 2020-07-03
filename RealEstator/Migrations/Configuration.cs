@@ -26,7 +26,7 @@ namespace RealEstator.Migrations
                 new Condo()
                 {
                     CondoID = 1,
-                    Address = "123 Test Ave",
+                    Address = "4124 Oliver Ave",
                     Beds = 1,
                     Baths = 1,
                     SquareFootage = 500,
@@ -41,7 +41,7 @@ namespace RealEstator.Migrations
                 new Home()
                 {
                     HomeID = 1,
-                    Address = "123 Test Ave",
+                    Address = "4124 Oliver Ave",
                     Beds = 2,
                     Baths = 2,
                     SquareFootage = 1050,
@@ -56,7 +56,7 @@ namespace RealEstator.Migrations
                 new Townhouse()
                 {
                     TownhouseID = 1,
-                    Address = "123 Test Ave",
+                    Address = "4124 Oliver Ave",
                     Beds = 2,
                     Baths = 1,
                     SquareFootage = 860,
@@ -65,6 +65,15 @@ namespace RealEstator.Migrations
                     Occupied = true,
                     YearBuilt = 2001,
                     Price = 1050,
+                });
+
+            context.Requests.AddOrUpdate(x => x.RequestID,
+                new Request()
+                {
+                    RequestID = 1,
+                    Name = "Timmy",
+                    Address = "4124 Oliver Ave",
+                    Issue = "A/C is not working",
                 });
         }
     }

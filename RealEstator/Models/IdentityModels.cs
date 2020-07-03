@@ -35,5 +35,7 @@ namespace RealEstator.Models
         public System.Data.Entity.DbSet<RealEstator.Models.Condo> Condos { get; set; }
 
         public System.Data.Entity.DbSet<RealEstator.Models.Townhouse> Townhouses { get; set; }
+
+        public System.Data.Entity.DbSet<RealEstator.Models.Request> Requests { get; set; }
     }
 }

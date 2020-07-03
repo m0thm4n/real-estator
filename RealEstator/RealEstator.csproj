@@ -48,10 +48,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BingMapsRESTToolkit, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BingMapsRESTToolkit.1.1.4\lib\net45\BingMapsRESTToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -176,24 +181,24 @@
     <Compile Include="Controllers\CondosController.cs" />
     <Compile Include="Controllers\HomesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\TownhousesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006222257501_InitialCreate.cs" />
-    <Compile Include="Migrations\202006222257501_InitialCreate.Designer.cs">
-      <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006302245330_InitialSeed.cs" />
-    <Compile Include="Migrations\202006302245330_InitialSeed.Designer.cs">
-      <DependentUpon>202006302245330_InitialSeed.cs</DependentUpon>
+    <Compile Include="Migrations\202007031831330_RequestCreate.cs" />
+    <Compile Include="Migrations\202007031831330_RequestCreate.Designer.cs">
+      <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Condo.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LatLong.cs" />
+    <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Townhouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -258,7 +263,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Homes\Create.cshtml" />
     <Content Include="Views\Homes\Delete.cshtml" />
     <Content Include="Views\Homes\Index.cshtml" />
     <Content Include="Views\Condos\Delete.cshtml" />
@@ -273,6 +277,12 @@
     <Content Include="Views\Condos\Edit.cshtml" />
     <Content Include="Views\Homes\Details.cshtml" />
     <Content Include="Views\Homes\Edit.cshtml" />
+    <Content Include="Views\Homes\Create.cshtml" />
+    <Content Include="Views\Requests\Create.cshtml" />
+    <Content Include="Views\Requests\Delete.cshtml" />
+    <Content Include="Views\Requests\Details.cshtml" />
+    <Content Include="Views\Requests\Edit.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -291,11 +301,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006222257501_InitialCreate.resx">
-      <DependentUpon>202006222257501_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006302245330_InitialSeed.resx">
-      <DependentUpon>202006302245330_InitialSeed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007031831330_RequestCreate.resx">
+      <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

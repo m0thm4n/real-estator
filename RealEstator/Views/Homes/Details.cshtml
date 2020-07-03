@@ -6,23 +6,27 @@
 
 <h2>Details</h2>
 
+@{
+    var coords = RealEstator.Models.GeocodeHelper.Geocode(Model.Address);
+}
+
 <script type="text/javascript">
     function loadMapScenario() {
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-            credentials: '' // Add API Key
-            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            credentials: "AqDAHWGqF_8t8GLQd8-bYTXxSpB8pe88jnVHkrXbXSzDytBI9g2g-TJQG6jm7S5x",
+            mapTypeId: Microsoft.Maps.mapTypeId.road,
             zoom: 5
         });
 
-        // Create the infobox for the pushpin
-        var infobox = null
+        // Create the inforbox for the pushpin
+        var infobox = null;
 
         // declare addMarker function
         function addMarker(latitude, longitude, title, description, pid) {
             var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
 
             infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
-                visiable: false
+                visible: false
             });
 
             marker.metadata = {
@@ -31,7 +35,7 @@
                 description: description
             };
 
-            Microsoft.Maps.Events.addHandler(marker, 'mouseout', hidInfobox);
+            Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
             Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
 
             infobox.setMap(map);
@@ -55,104 +59,98 @@
         }
 
         // add markers to map
-        @if (Model.Home != null) // Fix this with model data 
-        {
-            foreach (var item in Model.Address)
-            {
-                @:addMarker(@item.);
-            }
-        }
+        addMarker(coords.Latitude, coords.Longitude);
     }
 </script>
 
-<script type="text/javascript" src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
-<div>
-    <div class="jumbotron">
-        <h2>MAP INTEGRATION</h2>
+<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
+
+<div class="jumbotron">
+    <h2>MAP INTEGRATION</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-12 map">
+        <div id="myMap" style="width:100%; height:610px;"></div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12 map">
-            <div id="myMap" style="width: 100%; height: 610px;"></div>
-        </div>
-    </div>
+<h4>Home</h4>
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
 
-    <h4>Home</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Beds)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Beds)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Beds)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Beds)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Baths)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Baths)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Baths)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Baths)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.SquareFootage)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SquareFootage)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.SquareFootage)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SquareFootage)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.HasPool)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HasPool)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.HasPool)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HasPool)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.IsWaterfront)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsWaterfront)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.IsWaterfront)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsWaterfront)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Occupied)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Occupied)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Occupied)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Occupied)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.YearBuilt)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.YearBuilt)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.YearBuilt)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.YearBuilt)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Price)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-    </dl>
+</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.HomeID }) |

@@ -7,13 +7,13 @@ namespace RealEstator.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialSeed : IMigrationMetadata
+    public sealed partial class RequestCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialSeed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RequestCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006302245330_InitialSeed"; }
+            get { return "202007031831330_RequestCreate"; }
         }
         
         string IMigrationMetadata.Source
