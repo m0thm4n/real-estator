@@ -23,11 +23,11 @@ namespace RealEstator
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             // Create admin role first and a default admin user
-            if (!roleManager.RoleExists("Admin"))
+            if (!roleManager.RoleExists("Administrator"))
             {
                 // first create Admin role
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admin";
+                role.Name = "Admininistrator";
                 roleManager.Create(role);
 
                 // Create a Admin super user who will maintain the website
@@ -43,7 +43,7 @@ namespace RealEstator
                 // Add default User to Role Admin
                 if (checkUser.Succeeded)
                 {
-                    var resultOne = userManager.AddToRole(user.Id, "Admin");
+                    var resultOne = userManager.AddToRole(user.Id, "Administrator");
                 }
             }
 

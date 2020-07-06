@@ -11,7 +11,7 @@ namespace RealEstator.Models
         [Key]
         public int HomeID { get; set; }
         [Required]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
         [Required]
         public int Beds { get; set; }
         [Required]

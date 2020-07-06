@@ -38,7 +38,7 @@ namespace RealEstator.Controllers
         // GET: Townhouses/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Townhouse());
         }
 
         // POST: Townhouses/Create

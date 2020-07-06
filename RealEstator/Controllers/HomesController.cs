@@ -38,7 +38,7 @@ namespace RealEstator.Controllers
         // GET: Homes/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Home());
         }
 
         // POST: Homes/Create
