@@ -15,7 +15,7 @@ namespace RealEstator.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Requests
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles="Renter")]
         public ActionResult Index()
         {
             return View(db.Requests.ToList());
@@ -36,12 +36,14 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = "Tenant")]
         // GET: Requests/Create
         public ActionResult Create()
         {
             return View(new Request());
         }
 
+        [Authorize(Roles = "Tenant")]
         // POST: Requests/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

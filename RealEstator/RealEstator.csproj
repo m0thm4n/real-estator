@@ -188,13 +188,19 @@
     <Compile Include="Controllers\HomesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TownhousesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202007031831330_RequestCreate.cs" />
     <Compile Include="Migrations\202007031831330_RequestCreate.Designer.cs">
       <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007072211528_AddedUsers.cs" />
+    <Compile Include="Migrations\202007072211528_AddedUsers.designer.cs">
+      <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -394,6 +400,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -404,6 +412,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202007031831330_RequestCreate.resx">
       <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007072211528_AddedUsers.resx">
+      <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

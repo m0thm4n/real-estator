@@ -12,6 +12,7 @@ namespace RealEstator
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            createRoleandUsers();
         }
 
         // Creating default users roles and Admin user for login
@@ -23,11 +24,11 @@ namespace RealEstator
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             // Create admin role first and a default admin user
-            if (!roleManager.RoleExists("Administrator"))
+            if (!roleManager.RoleExists("Admin"))
             {
                 // first create Admin role
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admininistrator";
+                role.Name = "Admin";
                 roleManager.Create(role);
 
                 // Create a Admin super user who will maintain the website
@@ -36,14 +37,14 @@ namespace RealEstator
                 user.UserName = "mothman";
                 user.Email = "nathan.moritz@protonmail.com";
 
-                string userPass = "UH@v3B33nH@ck3d!";
+                string userPass = "B@bycakes15!";
 
                 var checkUser = userManager.Create(user, userPass); ;
 
                 // Add default User to Role Admin
                 if (checkUser.Succeeded)
                 {
-                    var resultOne = userManager.AddToRole(user.Id, "Administrator");
+                    var result1 = userManager.AddToRole(user.Id, "Admin");
                 }
             }
 
