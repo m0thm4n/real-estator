@@ -15,12 +15,13 @@ namespace RealEstator.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Requests
-        [Authorize(Roles="Renter")]
+        [Authorize(Roles="Renter,Admin")]
         public ActionResult Index()
         {
             return View(db.Requests.ToList());
         }
-
+        
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Requests/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,7 +37,7 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
-        [Authorize(Roles = "Tenant")]
+        [Authorize(Roles = "Tenant,Admin")]
         // GET: Requests/Create
         public ActionResult Create()
         {
@@ -61,6 +62,7 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = "Tenant,Renter, Admin")]
         // GET: Requests/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -76,6 +78,7 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = "Tenant, Renter,Admin")]
         // POST: Requests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -92,6 +95,7 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = "Renter, Admin")]
         // GET: Requests/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -107,6 +111,7 @@ namespace RealEstator.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = "Renter, Admin")]
         // POST: Requests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

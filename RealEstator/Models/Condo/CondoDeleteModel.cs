@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace RealEstator.Models
+namespace RealEstator.Models.Condo
 {
-    public class Townhouse
+    public class CondoDeleteModel
     {
         [Key]
-        public int TownhouseID { get; set; }
+        public int CondoID { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]

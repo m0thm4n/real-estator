@@ -6,20 +6,34 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RealEstator.Contacts;
+using RealEstator.Data;
 using RealEstator.Models;
+using RealEstator.Models.Home;
+using RealEstator.Models.HomeDeleteModel;
 
 namespace RealEstator.Controllers
 {
     public class HomesController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
+        private IHomesService _homeService;
 
+        public HomesController() { }
+        public HomesController(IHomesService homeService, ApplicationDbContext db)
+        {
+            _homeService = homeService;
+            _db = db;
+        }
+
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Homes
         public ActionResult Index()
         {
             return View(_db.Homes.ToList());
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Details/5
         public ActionResult Details(int? id)
         {
@@ -27,7 +41,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _db.Homes.Find(id);
+            HomeDetailsModel home = _homeService.DetailsHome(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -35,29 +49,31 @@ namespace RealEstator.Controllers
             return View(home);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Create
         public ActionResult Create()
         {
             return View(new Home());
         }
 
+        [Authorize(Roles = "Renter")]
         // POST: Homes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HomeID,Address,Rooms,SquareFootage,HasPool,Occupied")] Home home)
+        public ActionResult Create(HomeCreateModel home)
         {
             if (ModelState.IsValid)
             {
-                _db.Homes.Add(home);
-                _db.SaveChanges();
+                _homeService.CreateHome(home);
                 return RedirectToAction("Index");
             }
 
             return View(home);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -65,7 +81,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _db.Homes.Find(id);
+            HomeEditModel home = _homeService.EditHome(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -73,6 +89,7 @@ namespace RealEstator.Controllers
             return View(home);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Homes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,6 +106,7 @@ namespace RealEstator.Controllers
             return View(home);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -96,7 +114,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = _db.Homes.Find(id);
+            HomeDeleteModel home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -104,14 +122,12 @@ namespace RealEstator.Controllers
             return View(home);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Homes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Home home = _db.Homes.Find(id);
-            _db.Homes.Remove(home);
-            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 

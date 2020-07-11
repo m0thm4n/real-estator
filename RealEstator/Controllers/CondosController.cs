@@ -14,12 +14,14 @@ namespace RealEstator.Controllers
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes
         public ActionResult Index()
         {
             return View(_db.Condos.ToList());
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,12 +37,14 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Create
         public ActionResult Create()
         {
             return View(new Condo());
         }
-
+        
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,6 +62,7 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,6 +78,7 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,6 +95,7 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,6 +111,7 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -14,12 +14,14 @@ namespace RealEstator.Controllers
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Townhouses
         public ActionResult Index()
         {
             return View(_db.Townhouses.ToList());
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Townhouses/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,12 +37,14 @@ namespace RealEstator.Controllers
             return View(townhouse);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Townhouses/Create
         public ActionResult Create()
         {
             return View(new Townhouse());
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Townhouses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,6 +62,7 @@ namespace RealEstator.Controllers
             return View(townhouse);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Townhouses/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,6 +78,7 @@ namespace RealEstator.Controllers
             return View(townhouse);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Townhouses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,6 +95,7 @@ namespace RealEstator.Controllers
             return View(townhouse);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Townhouses/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,6 +111,7 @@ namespace RealEstator.Controllers
             return View(townhouse);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Townhouses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

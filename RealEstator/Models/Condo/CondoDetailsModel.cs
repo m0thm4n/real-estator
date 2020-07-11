@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace RealEstator.Models
+namespace RealEstator.Models.Condo
 {
-    public class Home
+    public class CondoDetailsModel
     {
         [Key]
-        public int HomeID { get; set; }
+        public int CondoID { get; set; }
         [Required]
-        public string Address { get; set; } = string.Empty;
+        public string Address { get; set; }
         [Required]
         public int Beds { get; set; }
         [Required]
