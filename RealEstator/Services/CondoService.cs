@@ -17,7 +17,7 @@ namespace RealEstator.Services
             _db = db;
         }
 
-        public void CreateHome(CondoCreateModel model)
+        public void CreateCondo(CondoCreateModel model)
         {
             var entity = new Condo()
             {

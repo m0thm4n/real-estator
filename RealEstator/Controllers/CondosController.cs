@@ -6,13 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RealEstator.Data;
 using RealEstator.Models;
+using RealEstator.Models.Condo;
 
 namespace RealEstator.Controllers
 {
     public class CondosController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
+        private IHomesService _homeService;
+
+        public HomesController() { }
+        public HomesController(IHomesService homeService, ApplicationDbContext db)
+        {
+            _homeService = homeService;
+            _db = db;
+        }
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes
@@ -29,7 +39,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _db.Condos.Find(id);
+            CondoDetailsModel condo = _db.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -50,12 +60,11 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CondoID,Address,Rooms,SquareFootage,HasPool,IsWaterfront,Occupied,YearBuilt,Price")] Condo condo)
+        public ActionResult Create(CondoCreateModel condo)
         {
             if (ModelState.IsValid)
             {
-                _db.Condos.Add(condo);
-                _db.SaveChanges();
+                _condoService.CreateCondo(model);
                 return RedirectToAction("Index");
             }
 
