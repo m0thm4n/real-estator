@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Condo;
@@ -15,12 +16,12 @@ namespace RealEstator.Controllers
     public class CondosController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
-        private IHomesService _homeService;
+        private ICondoService _condoService;
 
-        public HomesController() { }
-        public HomesController(IHomesService homeService, ApplicationDbContext db)
+        public CondosController() { }
+        public CondosController(ICondoService condoService, ApplicationDbContext db)
         {
-            _homeService = homeService;
+            _condoService = condoService;
             _db = db;
         }
 
@@ -39,7 +40,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CondoDetailsModel condo = _db.Condos.Find(id);
+            CondoDetailsModel condo = _condoService.CondoDetails(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -64,7 +65,7 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                _condoService.CreateCondo(model);
+                _condoService.CreateCondo(condo);
                 return RedirectToAction("Index");
             }
 
@@ -93,12 +94,12 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CondoID,Address,Rooms,SquareFootage,HasPool,IsWaterfront,Occupied,YearBuilt,Price")] Condo condo)
+        public ActionResult Edit(int id, CondoEditModel condo)
         {
             if (ModelState.IsValid)
             {
                 _db.Entry(condo).State = EntityState.Modified;
-                _db.SaveChanges();
+                _condoService.EditCondo(id, condo);
                 return RedirectToAction("Index");
             }
             return View(condo);
@@ -112,7 +113,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _db.Condos.Find(id);
+            CondoDeleteModel condo = _condoService.DeleteCondo(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -124,11 +125,9 @@ namespace RealEstator.Controllers
         // POST: Condoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Condo condo = _db.Condos.Find(id);
-            _db.Condos.Remove(condo);
-            _db.SaveChanges();
+            _condoService.DeleteCondo(id);
             return RedirectToAction("Index");
         }
 

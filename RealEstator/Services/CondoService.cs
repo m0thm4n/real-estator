@@ -54,11 +54,13 @@ namespace RealEstator.Services
             };
         }
 
-        public void DeleteCondo(int id)
+        public CondoDeleteModel DeleteCondo(int? id)
         {
             var entity = _db.Homes.Find(id);
             _db.Homes.Remove(entity);
             _db.SaveChanges();
+
+            return entity;
         }
 
         public CondoEditModel EditCondo(int id, CondoEditModel model)

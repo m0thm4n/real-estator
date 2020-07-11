@@ -13,7 +13,7 @@ namespace RealEstator.Contacts
     public interface IHomesService
     {
         void CreateHome(HomeCreateModel home);
-        HomeDetailsModel DetailsHome(int? id);
+        HomeDetailsModel HomeDetails(int? id);
         HomeEditModel EditHome(int id, HomeEditModel model);
         void DeleteHome(int id);
 

@@ -183,7 +183,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Contacts\ICondoService.cs" />
     <Compile Include="Contacts\IHomesService.cs" />
+    <Compile Include="Contacts\IRequestService.cs" />
+    <Compile Include="Contacts\ITownhouseService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CondosController.cs" />
     <Compile Include="Controllers\HomesController.cs" />
@@ -232,8 +235,6 @@
     <Compile Include="Services\CondoService.cs" />
     <Compile Include="Services\HomesService.cs" />
     <Compile Include="Services\RequestService.cs" />
-    <Compile Include="Services\TownhouseDetailsModel.cs" />
-    <Compile Include="Services\TownhouseEditModel.cs" />
     <Compile Include="Services\TownhouseService.cs" />
     <Compile Include="Models\Townhouse\TownhouseCreateModel.cs" />
     <Compile Include="Startup.cs" />
