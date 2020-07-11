@@ -12,7 +12,7 @@ namespace RealEstator.Contacts
     {
         void CreateTownhouse(TownhouseCreateModel home);
         TownhouseDetailsModel TownhouseDetails(int? id);
-        TownhouseEditModel EditHome(int id, TownhouseEditModel model);
-        void DeleteTownhouse(int id);
+        TownhouseEditModel EditTownhouse(int id, TownhouseEditModel model);
+        void DeleteTownhouse(int? id);
     }
 }

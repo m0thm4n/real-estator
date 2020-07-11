@@ -1,4 +1,5 @@
 using Microsoft.Owin.BuilderProperties;
+using RealEstator.Data;
 using RealEstator.Models;
 using System;
 using System.Data.Entity;

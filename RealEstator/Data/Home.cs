@@ -28,5 +28,6 @@ namespace RealEstator.Data
         public int YearBuilt { get; set; }
         [Required]
         public int Price { get; set; }
+        public int CondoID { get; internal set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using RealEstator.Data;
 using RealEstator.Models;
+using RealEstator.Models.Townhouse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,14 +54,16 @@ namespace RealEstator.Services
             };
         }
 
-        public void DeleteTownhouse(int id)
+        public TownhouseDeleteModel DeleteTownhouse(int? id)
         {
             var entity = _db.Homes.Find(id);
             _db.Homes.Remove(entity);
             _db.SaveChanges();
+
+            return entity;
         }
 
-        public TownhouseEditModel EditHome(int id, TownhouseEditModel model)
+        public TownhouseEditModel EditTownhouse(int id, TownhouseEditModel model)
         {
             var homeWeWantToEdit = _db.Homes.Find(id);
             if (homeWeWantToEdit != null)

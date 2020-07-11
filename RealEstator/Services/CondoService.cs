@@ -38,7 +38,7 @@ namespace RealEstator.Services
 
         public CondoDetailsModel CondoDetails(int? id)
         {
-            var entity = _db.Homes.Single(e => e.HomeId == id);
+            var entity = _db.Homes.Single(e => e.CondoID == id);
             return new CondoDetailsModel
             {
                 CondoID = entity.CondoID,

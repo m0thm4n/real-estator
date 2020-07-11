@@ -10,7 +10,6 @@ using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Home;
-using RealEstator.Models.HomeDeleteModel;
 
 namespace RealEstator.Controllers
 {
@@ -41,7 +40,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeDetailsModel home = _homeService.DetailsHome(id);
+            HomeDetailsModel home = _homeService.HomeDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -81,7 +80,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeEditModel home = _homeService.EditHome(id);
+            HomeEditModel home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -95,12 +94,12 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HomeID,Address,Rooms,SquareFootage,HasPool,Occupied")] Home home)
+        public ActionResult Edit(int id, HomeEditModel home)
         {
             if (ModelState.IsValid)
             {
                 _db.Entry(home).State = EntityState.Modified;
-                _db.SaveChanges();
+                _homeService.EditHome(id, home);
                 return RedirectToAction("Index");
             }
             return View(home);
@@ -114,7 +113,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeDeleteModel home = _db.Homes.Find(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
