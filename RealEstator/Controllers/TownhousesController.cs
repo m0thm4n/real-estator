@@ -81,7 +81,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TownhouseEditModel townhouse = _db.Condos.Find(id);
+            Townhouse townhouse = _db.Townhouses.Find(id);
             if (townhouse == null)
             {
                 return HttpNotFound();

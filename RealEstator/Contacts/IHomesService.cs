@@ -14,7 +14,7 @@ namespace RealEstator.Contacts
     {
         void CreateHome(HomeCreateModel home);
         HomeDetailsModel HomeDetails(int? id);
-        HomeEditModel EditHome(int id, HomeEditModel model);
+        Home EditHome(int id, HomeEditModel model);
         void DeleteHome(int id);
 
     }

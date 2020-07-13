@@ -31,7 +31,7 @@ namespace RealEstator.Services
                 YearBuilt = model.YearBuilt,
                 Price = model.Price,
             };
-            _db.Homes.Add(entity);
+            _db.Condos.Add(entity);
             _db.SaveChanges();
         }
 
@@ -54,33 +54,33 @@ namespace RealEstator.Services
             };
         }
 
-        public CondoDeleteModel DeleteCondo(int? id)
+        public Condo DeleteCondo(int? id)
         {
-            var entity = _db.Homes.Find(id);
-            _db.Homes.Remove(entity);
+            var entity = _db.Condos.Find(id);
+            _db.Condos.Remove(entity);
             _db.SaveChanges();
 
             return entity;
         }
 
-        public CondoEditModel EditCondo(int id, CondoEditModel model)
+        public Condo EditCondo(int id, CondoEditModel model)
         {
-            var homeWeWantToEdit = _db.Homes.Find(id);
-            if (homeWeWantToEdit != null)
+            var condoWeWantToEdit = _db.Condos.Find(id);
+            if (condoWeWantToEdit != null)
             {
-                homeWeWantToEdit.Address = model.Address;
-                homeWeWantToEdit.Beds = model.Beds;
-                homeWeWantToEdit.Baths = model.Baths;
-                homeWeWantToEdit.SquareFootage = model.SquareFootage;
-                homeWeWantToEdit.HasPool = model.HasPool;
-                homeWeWantToEdit.IsWaterfront = model.IsWaterfront;
-                homeWeWantToEdit.Occupied = model.Occupied;
-                homeWeWantToEdit.YearBuilt = model.YearBuilt;
-                homeWeWantToEdit.Price = model.Price;
+                condoWeWantToEdit.Address = model.Address;
+                condoWeWantToEdit.Beds = model.Beds;
+                condoWeWantToEdit.Baths = model.Baths;
+                condoWeWantToEdit.SquareFootage = model.SquareFootage;
+                condoWeWantToEdit.HasPool = model.HasPool;
+                condoWeWantToEdit.IsWaterfront = model.IsWaterfront;
+                condoWeWantToEdit.Occupied = model.Occupied;
+                condoWeWantToEdit.YearBuilt = model.YearBuilt;
+                condoWeWantToEdit.Price = model.Price;
 
                 _db.SaveChanges();
 
-                return homeWeWantToEdit;
+                return condoWeWantToEdit;
             }
 
             return null;

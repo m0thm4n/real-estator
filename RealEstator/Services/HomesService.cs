@@ -60,7 +60,7 @@ namespace RealEstator.Services
             _db.SaveChanges();
         }
 
-        public HomeEditModel EditHome(int id, HomeEditModel model)
+        public Home EditHome(int id, HomeEditModel model)
         {
             var homeWeWantToEdit = _db.Homes.Find(id);
             if (homeWeWantToEdit != null)

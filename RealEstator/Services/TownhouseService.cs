@@ -17,7 +17,7 @@ namespace RealEstator.Services
             _db = db;
         }
 
-        public void CreateHome(TownhouseCreateModel model)
+        public void CreateTownhouse(TownhouseCreateModel model)
         {
             var entity = new Townhouse()
             {
@@ -31,17 +31,17 @@ namespace RealEstator.Services
                 YearBuilt = model.YearBuilt,
                 Price = model.Price,
             };
-            _db.Homes.Add(entity);
+            _db.Townhouses.Add(entity);
             _db.SaveChanges();
         }
 
 
         public TownhouseDetailsModel TownhouseDetails(int? id)
         {
-            var entity = _db.Homes.Single(e => e.HomeId == id);
+            var entity = _db.Townhouses.Single(e => e.TownhouseID == id);
             return new TownhouseDetailsModel
             {
-                HomeID = entity.HomeID,
+                HomeID = entity.TownhouseID,
                 Address = entity.Address,
                 Beds = entity.Beds,
                 Baths = entity.Baths,
@@ -54,33 +54,33 @@ namespace RealEstator.Services
             };
         }
 
-        public TownhouseDeleteModel DeleteTownhouse(int? id)
+        public Townhouse DeleteTownhouse(int? id)
         {
-            var entity = _db.Homes.Find(id);
-            _db.Homes.Remove(entity);
+            var entity = _db.Townhouses.Find(id);
+            _db.Townhouses.Remove(entity);
             _db.SaveChanges();
 
             return entity;
         }
 
-        public TownhouseEditModel EditTownhouse(int id, TownhouseEditModel model)
+        public Townhouse EditTownhouse(int id, TownhouseEditModel model)
         {
-            var homeWeWantToEdit = _db.Homes.Find(id);
-            if (homeWeWantToEdit != null)
+            var townhouseWeWantToEdit = _db.Townhouses.Find(id);
+            if (townhouseWeWantToEdit != null)
             {
-                homeWeWantToEdit.Address = model.Address;
-                homeWeWantToEdit.Beds = model.Beds;
-                homeWeWantToEdit.Baths = model.Baths;
-                homeWeWantToEdit.SquareFootage = model.SquareFootage;
-                homeWeWantToEdit.HasPool = model.HasPool;
-                homeWeWantToEdit.IsWaterfront = model.IsWaterfront;
-                homeWeWantToEdit.Occupied = model.Occupied;
-                homeWeWantToEdit.YearBuilt = model.YearBuilt;
-                homeWeWantToEdit.Price = model.Price;
+                townhouseWeWantToEdit.Address = model.Address;
+                townhouseWeWantToEdit.Beds = model.Beds;
+                townhouseWeWantToEdit.Baths = model.Baths;
+                townhouseWeWantToEdit.SquareFootage = model.SquareFootage;
+                townhouseWeWantToEdit.HasPool = model.HasPool;
+                townhouseWeWantToEdit.IsWaterfront = model.IsWaterfront;
+                townhouseWeWantToEdit.Occupied = model.Occupied;
+                townhouseWeWantToEdit.YearBuilt = model.YearBuilt;
+                townhouseWeWantToEdit.Price = model.Price;
 
                 _db.SaveChanges();
 
-                return homeWeWantToEdit;
+                return townhouseWeWantToEdit;
             }
 
             return null;

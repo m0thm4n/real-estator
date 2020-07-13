@@ -80,7 +80,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeEditModel home = _db.Homes.Find(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
