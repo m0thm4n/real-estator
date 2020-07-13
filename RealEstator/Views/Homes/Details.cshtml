@@ -6,85 +6,151 @@
 
 <h2>Details</h2>
 
+@{
+    var coords = RealEstator.Models.GeocodeHelper.Geocode(Model.Address);
+}
 
+<script type="text/javascript">
+    function loadMapScenario() {
+        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+            credentials: "AqDAHWGqF_8t8GLQd8-bYTXxSpB8pe88jnVHkrXbXSzDytBI9g2g-TJQG6jm7S5x",
+            mapTypeId: Microsoft.Maps.mapTypeId.road,
+            zoom: 5
+        });
 
-<div>
-    <h4>Home</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+        // Create the inforbox for the pushpin
+        var infobox = null;
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+        // declare addMarker function
+        function addMarker(latitude, longitude, title, description, pid) {
+            var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Beds)
-        </dt>
+            infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
+                visible: false
+            });
 
-        <dd>
-            @Html.DisplayFor(model => model.Beds)
-        </dd>
+            marker.metadata = {
+                id: pid,
+                title: title,
+                description: description
+            };
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Baths)
-        </dt>
+            Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
+            Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
 
-        <dd>
-            @Html.DisplayFor(model => model.Baths)
-        </dd>
+            infobox.setMap(map);
+            map.entities.push(marker);
+            marker.setOptions({ enableHoverStyle: true });
+        };
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SquareFootage)
-        </dt>
+        function showInfobox(e) {
+            if (e.target.metadata) {
+                infobox.setOptions({
+                    location: e.target.getLocation(),
+                    title: e.target.metadata.title,
+                    description: e.target.metadata.description,
+                    visible: true
+                });
+            }
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.SquareFootage)
-        </dd>
+        function hideInfobox(e) {
+            infobox.setOptions({ visible: false });
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HasPool)
-        </dt>
+        // add markers to map
+        addMarker(coords.Latitude, coords.Longitude);
+    }
+</script>
 
-        <dd>
-            @Html.DisplayFor(model => model.HasPool)
-        </dd>
+<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsWaterfront)
-        </dt>
+<div class="jumbotron">
+    <h2>MAP INTEGRATION</h2>
+</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsWaterfront)
-        </dd>
+<div class="row">
+    <div class="col-md-12 map">
+        <div id="myMap" style="width:100%; height:610px;"></div>
+    </div>
+</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Occupied)
-        </dt>
+<h4>Home</h4>
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Occupied)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.YearBuilt)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Beds)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.YearBuilt)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Beds)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Baths)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Baths)
+    </dd>
 
-    </dl>
+    <dt>
+        @Html.DisplayNameFor(model => model.SquareFootage)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.SquareFootage)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.HasPool)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.HasPool)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.IsWaterfront)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.IsWaterfront)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Occupied)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Occupied)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.YearBuilt)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.YearBuilt)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Price)
+    </dd>
+
+</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.HomeID }) |

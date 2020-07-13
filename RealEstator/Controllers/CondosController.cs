@@ -6,20 +6,33 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using RealEstator.Contacts;
+using RealEstator.Data;
 using RealEstator.Models;
+using RealEstator.Models.Condo;
 
 namespace RealEstator.Controllers
 {
     public class CondosController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
+        private ICondoService _condoService;
 
+        public CondosController() { }
+        public CondosController(ICondoService condoService, ApplicationDbContext db)
+        {
+            _condoService = condoService;
+            _db = db;
+        }
+
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes
         public ActionResult Index()
         {
             return View(_db.Condos.ToList());
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -27,7 +40,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _db.Condos.Find(id);
+            CondoDetailsModel condo = _condoService.CondoDetails(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -35,29 +48,31 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Condo());
         }
-
+        
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CondoID,Address,Rooms,SquareFootage,HasPool,IsWaterfront,Occupied,YearBuilt,Price")] Condo condo)
+        public ActionResult Create(CondoCreateModel condo)
         {
             if (ModelState.IsValid)
             {
-                _db.Condos.Add(condo);
-                _db.SaveChanges();
+                _condoService.CreateCondo(condo);
                 return RedirectToAction("Index");
             }
 
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,22 +88,24 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CondoID,Address,Rooms,SquareFootage,HasPool,IsWaterfront,Occupied,YearBuilt,Price")] Condo condo)
+        public ActionResult Edit(int id, CondoEditModel condo)
         {
             if (ModelState.IsValid)
             {
                 _db.Entry(condo).State = EntityState.Modified;
-                _db.SaveChanges();
+                _condoService.EditCondo(id, condo);
                 return RedirectToAction("Index");
             }
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // GET: Condoes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -96,7 +113,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Condo condo = _db.Condos.Find(id);
+            CondoDeleteModel condo = _condoService.DeleteCondo(id);
             if (condo == null)
             {
                 return HttpNotFound();
@@ -104,14 +121,13 @@ namespace RealEstator.Controllers
             return View(condo);
         }
 
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Condoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Condo condo = _db.Condos.Find(id);
-            _db.Condos.Remove(condo);
-            _db.SaveChanges();
+            _condoService.DeleteCondo(id);
             return RedirectToAction("Index");
         }
 
