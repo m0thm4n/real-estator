@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202007072211528_AddedUsers.designer.cs">
       <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007132148294_AddedAdmin.cs" />
+    <Compile Include="Migrations\202007132148294_AddedAdmin.designer.cs">
+      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Data\Condo.cs" />
@@ -438,6 +442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007072211528_AddedUsers.resx">
       <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007132148294_AddedAdmin.resx">
+      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
