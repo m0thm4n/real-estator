@@ -205,9 +205,9 @@
     <Compile Include="Migrations\202007072211528_AddedUsers.designer.cs">
       <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007141558272_AdminMissin.cs" />
-    <Compile Include="Migrations\202007141558272_AdminMissin.designer.cs">
-      <DependentUpon>202007141558272_AdminMissin.cs</DependentUpon>
+    <Compile Include="Migrations\202007132148294_AddedAdmin.cs" />
+    <Compile Include="Migrations\202007132148294_AddedAdmin.designer.cs">
+      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -396,16 +396,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Homes\Index.cshtml" />
-    <Content Include="Views\Condos\Delete.cshtml" />
-    <Content Include="Views\Condos\Details.cshtml" />
-    <Content Include="Views\Condos\Index.cshtml" />
     <Content Include="Views\Townhouses\Create.cshtml" />
     <Content Include="Views\Townhouses\Delete.cshtml" />
     <Content Include="Views\Townhouses\Details.cshtml" />
     <Content Include="Views\Townhouses\Edit.cshtml" />
     <Content Include="Views\Townhouses\Index.cshtml" />
     <Content Include="Views\Condos\Create.cshtml" />
-    <Content Include="Views\Condos\Edit.cshtml" />
     <Content Include="Views\Homes\Details.cshtml" />
     <Content Include="Views\Homes\Edit.cshtml" />
     <Content Include="Views\Homes\Create.cshtml" />
@@ -429,6 +425,10 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Homes\Delete.cshtml" />
+    <Content Include="Views\Condos\Index.cshtml" />
+    <Content Include="Views\Condos\Edit.cshtml" />
+    <Content Include="Views\Condos\Details.cshtml" />
+    <Content Include="Views\Condos\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -443,8 +443,8 @@
     <EmbeddedResource Include="Migrations\202007072211528_AddedUsers.resx">
       <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007141558272_AdminMissin.resx">
-      <DependentUpon>202007141558272_AdminMissin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007132148294_AddedAdmin.resx">
+      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

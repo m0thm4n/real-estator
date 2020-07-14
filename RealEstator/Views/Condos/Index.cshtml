@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RealEstator.Data.Townhouse>
+﻿@model IEnumerable<RealEstator.Data.Condo>
 
 @{
     ViewBag.Title = "Index";
@@ -71,9 +71,9 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TownhouseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TownhouseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TownhouseID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.CondoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CondoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CondoID })
         </td>
     </tr>
 }
