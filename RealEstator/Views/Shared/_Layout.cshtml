@@ -8,7 +8,6 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fontawesome")
 
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,20 +19,21 @@
                     <span class="icon-bar"></span>
                 </i>
             </div>
-                @Html.ActionLink("Real Estator", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Real Estator", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("View All Maintenance Requests", "Index", "Requests")</li>
-                    <li>@Html.ActionLink("Submit Maintenance Request", "Create", "Requests")</li>
-                    <li>@Html.ActionLink("View Homes", "Index", "Homes")</li>
-                    <li>@Html.ActionLink("View Condos", "Index", "Condos")</li>
-                    <li>@Html.ActionLink("View Townhouses", "Index", "Townhouses")</li>
-                </ul>
-                @Html.Partial("_LoginPartial") 
-            </div>
-     </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("View All Maintenance Requests", "Index", "Requests")</li>
+                <li>@Html.ActionLink("Submit Maintenance Request", "Create", "Requests")</li>
+                <li>@Html.ActionLink("View Homes", "Index", "Homes")</li>
+                <li>@Html.ActionLink("View Condos", "Index", "Condos")</li>
+                <li>@Html.ActionLink("View Townhouses", "Index", "Townhouses")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
