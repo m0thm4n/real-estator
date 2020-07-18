@@ -40,7 +40,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CondoDetailsModel condo = _condoService.CondoDetails(id);
+            Condo condo = _db.Condos.Find(id);
             if (condo == null)
             {
                 return HttpNotFound();

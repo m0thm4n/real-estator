@@ -40,7 +40,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeDetailsModel home = _homeService.HomeDetails(id);
+            Home home = _db.Homes.Find(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -55,7 +55,7 @@ namespace RealEstator.Controllers
             return View(new Home());
         }
 
-        [Authorize(Roles = "Renter")]
+        [Authorize(Roles = "Renter,Admin")]
         // POST: Homes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
