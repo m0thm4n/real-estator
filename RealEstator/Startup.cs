@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using RealEstator.Data;
 using RealEstator.Models;
 
 [assembly: OwinStartupAttribute(typeof(RealEstator.Startup))]

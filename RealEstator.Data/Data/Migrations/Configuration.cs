@@ -1,22 +1,21 @@
 using Microsoft.Owin.BuilderProperties;
 using RealEstator.Data;
-using RealEstator.Models;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
-namespace RealEstator.Migrations
+namespace RealEstator.Data.Migrations
 {
 
-    internal sealed class Configuration : DbMigrationsConfiguration<RealEstator.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RealEstator.Data.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(RealEstator.Models.ApplicationDbContext context)
+        protected override void Seed(RealEstator.Data.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

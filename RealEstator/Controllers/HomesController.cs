@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using RealEstator.Contacts;
 using RealEstator.Data;
-using RealEstator.Models;
 using RealEstator.Models.Home;
+using GoogleAPI;
 
 namespace RealEstator.Controllers
 {
@@ -45,6 +41,11 @@ namespace RealEstator.Controllers
             {
                 return HttpNotFound();
             }
+
+            var apiKey = LoadConfig();
+
+            var map = GoogleMaps.GetMaps(apiKey, home.Address);
+            ViewBag["StaticMapUri"] = map.ToUri();
             return View(home);
         }
 

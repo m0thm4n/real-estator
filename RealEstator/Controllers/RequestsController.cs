@@ -51,7 +51,7 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RequestID,Name,Address,Issue")] Request request)
+        public ActionResult Create(Request request)
         {
             if (ModelState.IsValid)
             {

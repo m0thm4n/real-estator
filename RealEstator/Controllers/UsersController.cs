@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using RealEstator.Data;
 using RealEstator.Models;
 using System;
 using System.Collections.Generic;
