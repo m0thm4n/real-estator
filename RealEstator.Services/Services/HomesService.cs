@@ -2,6 +2,9 @@
 using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Home;
+using RealEstator.Models.Models.Home;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,7 +38,28 @@ namespace RealEstator.Services
             _db.SaveChanges();
         }
 
-        public HomeDetailsModel HomeDetails(int? id)
+        public IEnumerable<HomeListModel> GetHomes()
+        {
+            var entity = _db.Homes.Select(
+                    e => new HomeListModel
+                    {
+                        HomeID = e.HomeID,
+                        Address = e.Address,
+                        Beds = e.Beds,
+                        Baths = e.Baths,
+                        SquareFootage = e.SquareFootage,
+                        HasPool = e.HasPool,
+                        IsWaterfront = e.IsWaterfront,
+                        Occupied = e.Occupied,
+                        YearBuilt = e.YearBuilt,
+                        Price = e.Price,
+                    }
+                );
+
+            return entity.ToList();
+        }
+
+        public HomeDetailsModel HomeDetails(int id)
         {
             var entity = _db.Homes.Single(e => e.HomeID == id);
             return new HomeDetailsModel
@@ -55,32 +79,32 @@ namespace RealEstator.Services
 
         public void DeleteHome(int id)
         {
-            var entity = _db.Homes.Find(id);
+            var entity = _db.Homes.Single(e => e.HomeID == id);
             _db.Homes.Remove(entity);
+            _db.SaveChanges();
             _db.SaveChanges();
         }
 
-        public Home EditHome(int id, HomeEditModel model)
+        public bool EditHome(HomeEditModel homeToEdit)
         {
-            var homeWeWantToEdit = _db.Homes.Find(id);
-            if (homeWeWantToEdit != null)
+            _db.Entry(homeToEdit).State = EntityState.Modified;
+
+            var entity = _db.Homes.Single(e => e.HomeID == homeToEdit.HomeID);
+            if (entity != null)
             {
-                homeWeWantToEdit.Address = model.Address;
-                homeWeWantToEdit.Beds = model.Beds;
-                homeWeWantToEdit.Baths = model.Baths;
-                homeWeWantToEdit.SquareFootage = model.SquareFootage;
-                homeWeWantToEdit.HasPool = model.HasPool;
-                homeWeWantToEdit.IsWaterfront = model.IsWaterfront;
-                homeWeWantToEdit.Occupied = model.Occupied;
-                homeWeWantToEdit.YearBuilt = model.YearBuilt;
-                homeWeWantToEdit.Price = model.Price;
+                entity.Address = homeToEdit.Address;
+                entity.Beds = homeToEdit.Beds;
+                entity.Baths = homeToEdit.Baths;
+                entity.SquareFootage = homeToEdit.SquareFootage;
+                entity.HasPool = homeToEdit.HasPool;
+                entity.IsWaterfront = homeToEdit.IsWaterfront;
+                entity.Occupied = homeToEdit.Occupied;
+                entity.YearBuilt = homeToEdit.YearBuilt;
+                entity.Price = homeToEdit.Price;
                 
-                _db.SaveChanges();
-
-                return homeWeWantToEdit;
+                return _db.SaveChanges() == 1;
             }
-
-            return null;
+            return false;
         }
     }
 }

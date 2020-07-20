@@ -88,37 +88,30 @@
     <Compile Include="Data\Home.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="ManageViewModels.cs" />
-    <Compile Include="Data\Migrations\202007031831330_RequestCreate.cs" />
-    <Compile Include="Data\Migrations\202007031831330_RequestCreate.Designer.cs">
-      <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202007201732462_InitialCreate.cs" />
+    <Compile Include="Migrations\202007201732462_InitialCreate.Designer.cs">
+      <DependentUpon>202007201732462_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Migrations\202007072211528_AddedUsers.cs" />
-    <Compile Include="Data\Migrations\202007072211528_AddedUsers.Designer.cs">
-      <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
+    <Compile Include="Migrations\202007201733382_MovedDB.cs" />
+    <Compile Include="Migrations\202007201733382_MovedDB.Designer.cs">
+      <DependentUpon>202007201733382_MovedDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Migrations\202007132148294_AddedAdmin.cs" />
-    <Compile Include="Data\Migrations\202007132148294_AddedAdmin.Designer.cs">
-      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\Request.cs" />
     <Compile Include="Data\Townhouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Migrations\202007031831330_RequestCreate.resx">
-      <DependentUpon>202007031831330_RequestCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202007072211528_AddedUsers.resx">
-      <DependentUpon>202007072211528_AddedUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202007132148294_AddedAdmin.resx">
-      <DependentUpon>202007132148294_AddedAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202007201732462_InitialCreate.resx">
+      <DependentUpon>202007201732462_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007201733382_MovedDB.resx">
+      <DependentUpon>202007201733382_MovedDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

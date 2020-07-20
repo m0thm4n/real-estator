@@ -190,10 +190,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Contacts\ICondoService.cs" />
-    <Compile Include="Contacts\IHomesService.cs" />
-    <Compile Include="Contacts\IRequestService.cs" />
-    <Compile Include="Contacts\ITownhouseService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CondosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -422,6 +418,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Contracts\RealEstator.Contracts.csproj">
+      <Project>{C4FE3269-73D4-4E20-8AA1-A79938E8B151}</Project>
+      <Name>RealEstator.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GoogleAPI\RealEstator.GoogleAPI.csproj">
       <Project>{d5fc19bd-7678-46d4-8b70-49ae0ca76bc0}</Project>
       <Name>RealEstator.GoogleAPI</Name>

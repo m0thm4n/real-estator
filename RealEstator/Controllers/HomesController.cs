@@ -78,13 +78,9 @@ namespace RealEstator.Controllers
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Home home = _db.Homes.Find(id);
+            var home = _homeService.HomeDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -98,15 +94,25 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, HomeEditModel home)
+        public ActionResult Edit(int id, HomeEditModel homeToEdit)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(homeToEdit);
+
+
+            if (homeToEdit.HomeID != id)
             {
-                _db.Entry(home).State = EntityState.Modified;
-                _homeService.EditHome(id, home);
+                ModelState.AddModelError("", "ID does not match an existing home, please try again.");
+                return View(homeToEdit);
+            }
+
+            if (_homeService.EditHome(homeToEdit))
+            {
+                TempData["SaveResult"] = "You have updated your house.";
                 return RedirectToAction("Index");
             }
-            return View(home);
+
+            ModelState.AddModelError("", "Could not update home.");
+            return View(homeToEdit);
         }
 
         [Authorize(Roles = "Renter,Admin")]

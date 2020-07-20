@@ -79,23 +79,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Condo\CondoCreateModel.cs" />
-    <Compile Include="Models\Condo\CondoDeleteModel.cs" />
-    <Compile Include="Models\Condo\CondoDetailsModel.cs" />
-    <Compile Include="Models\Condo\CondoEditModel.cs" />
-    <Compile Include="Models\Home\HomeCreateModel.cs" />
-    <Compile Include="Models\Home\HomeDeleteModel.cs" />
-    <Compile Include="Models\Home\HomeDetailsModel.cs" />
-    <Compile Include="Models\Home\HomeEditModel.cs" />
-    <Compile Include="Models\Locations.cs" />
-    <Compile Include="Models\Request\RequestCreateModel.cs" />
-    <Compile Include="Models\Request\RequestDeleteModel.cs" />
-    <Compile Include="Models\Request\RequestDetailsModel.cs" />
-    <Compile Include="Models\Request\RequestEditModel.cs" />
-    <Compile Include="Models\Townhouse\TownhouseCreateModel.cs" />
-    <Compile Include="Models\Townhouse\TownhouseDeleteModel.cs" />
-    <Compile Include="Models\Townhouse\TownhouseDetailsModel.cs" />
-    <Compile Include="Models\Townhouse\TownhouseEditModel.cs" />
+    <Compile Include="Condo\CondoCreateModel.cs" />
+    <Compile Include="Condo\CondoDeleteModel.cs" />
+    <Compile Include="Condo\CondoDetailsModel.cs" />
+    <Compile Include="Condo\CondoEditModel.cs" />
+    <Compile Include="Home\HomeCreateModel.cs" />
+    <Compile Include="Home\HomeDeleteModel.cs" />
+    <Compile Include="Home\HomeDetailsModel.cs" />
+    <Compile Include="Home\HomeEditModel.cs" />
+    <Compile Include="Home\HomeListModel.cs" />
+    <Compile Include="Request\RequestCreateModel.cs" />
+    <Compile Include="Request\RequestDeleteModel.cs" />
+    <Compile Include="Request\RequestDetailsModel.cs" />
+    <Compile Include="Request\RequestEditModel.cs" />
+    <Compile Include="Townhouse\TownhouseCreateModel.cs" />
+    <Compile Include="Townhouse\TownhouseDeleteModel.cs" />
+    <Compile Include="Townhouse\TownhouseDetailsModel.cs" />
+    <Compile Include="Townhouse\TownhouseEditModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
