@@ -8,21 +8,16 @@ using System.Threading.Tasks;
 
 namespace RealEstator.Config
 {
-    public class Config
+    public static class GetConfig
     {
-        public List<ConfigFile> LoadConfig()
+        public static string LoadConfig()
         {
             using (StreamReader r = new StreamReader("config.json"))
             {
                 string json = r.ReadToEnd();
-                List<ConfigFile> items = JsonConvert.DeserializeObject<List<ConfigFile>>(json);
-                return items;
+                string apiKey = JsonConvert.DeserializeObject<string>(json);
+                return apiKey;
             }
-        }
-
-        public class ConfigFile
-        {
-            public string apiKey;
         }
     }
 }

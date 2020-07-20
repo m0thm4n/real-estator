@@ -22,5 +22,10 @@ namespace GoogleAPI
 
             return map;
         }
+
+        public GoogleMaps()
+        {
+
+        }
     }
 }

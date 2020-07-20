@@ -6,6 +6,7 @@ using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models.Home;
 using GoogleAPI;
+using RealEstator.Config;
 
 namespace RealEstator.Controllers
 {
@@ -13,12 +14,14 @@ namespace RealEstator.Controllers
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
         private IHomesService _homeService;
+        private GoogleMaps _google;
 
         public HomesController() { }
-        public HomesController(IHomesService homeService, ApplicationDbContext db)
+        public HomesController(IHomesService homeService, ApplicationDbContext db, GoogleMaps google)
         {
             _homeService = homeService;
             _db = db;
+            _google = google;
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -42,9 +45,9 @@ namespace RealEstator.Controllers
                 return HttpNotFound();
             }
 
-            var apiKey = LoadConfig();
+            var apiKey = GetConfig.LoadConfig();
 
-            var map = GoogleMaps.GetMaps(apiKey, home.Address);
+            var map = _google.GetMaps(apiKey, home.Address);
             ViewBag["StaticMapUri"] = map.ToUri();
             return View(home);
         }
