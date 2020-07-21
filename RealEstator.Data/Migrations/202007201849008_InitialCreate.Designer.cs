@@ -13,7 +13,7 @@ namespace RealEstator.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202007201732462_InitialCreate"; }
+            get { return "202007201849008_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

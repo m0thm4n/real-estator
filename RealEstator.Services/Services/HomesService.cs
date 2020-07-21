@@ -61,20 +61,24 @@ namespace RealEstator.Services
 
         public HomeDetailsModel HomeDetails(int id)
         {
-            var entity = _db.Homes.Single(e => e.HomeID == id);
-            return new HomeDetailsModel
+            using (var ctx = new ApplicationDbContext())
             {
-                HomeID = entity.HomeID,
-                Address = entity.Address,
-                Beds = entity.Beds,
-                Baths = entity.Baths,
-                SquareFootage = entity.SquareFootage,
-                HasPool = entity.HasPool,
-                IsWaterfront = entity.IsWaterfront,
-                Occupied = entity.Occupied,
-                YearBuilt = entity.YearBuilt,
-                Price = entity.Price,
-            };
+                var entity = ctx.Homes.Single(e => e.HomeID == id);
+                return new HomeDetailsModel
+                {
+                    HomeID = entity.HomeID,
+                    Address = entity.Address,
+                    Beds = entity.Beds,
+                    Baths = entity.Baths,
+                    SquareFootage = entity.SquareFootage,
+                    HasPool = entity.HasPool,
+                    IsWaterfront = entity.IsWaterfront,
+                    Occupied = entity.Occupied,
+                    YearBuilt = entity.YearBuilt,
+                    Price = entity.Price,
+                };
+            }
+            
         }
 
         public void DeleteHome(int id)

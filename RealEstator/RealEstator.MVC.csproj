@@ -381,7 +381,6 @@
     <Content Include="Views\Condos\Create.cshtml" />
     <Content Include="Views\Homes\Details.cshtml" />
     <Content Include="Views\Homes\Edit.cshtml" />
-    <Content Include="Views\Homes\Create.cshtml" />
     <Content Include="Views\Requests\Create.cshtml" />
     <Content Include="Views\Requests\Delete.cshtml" />
     <Content Include="Views\Requests\Details.cshtml" />
@@ -404,6 +403,7 @@
     <Content Include="Views\Condos\Edit.cshtml" />
     <Content Include="Views\Condos\Details.cshtml" />
     <Content Include="Views\Condos\Delete.cshtml" />
+    <Content Include="Views\Homes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

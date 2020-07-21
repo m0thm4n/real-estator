@@ -12,11 +12,10 @@ namespace RealEstator.Config
     {
         public static string LoadConfig()
         {
-            using (StreamReader r = new StreamReader("config.json"))
+            using (StreamReader sr = new StreamReader(@"C:\workspace\csharp\real-estator\config.txt"))
             {
-                string json = r.ReadToEnd();
-                string apiKey = JsonConvert.DeserializeObject<string>(json);
-                return apiKey;
+                string line = sr.ReadToEnd();
+                return line;
             }
         }
     }
