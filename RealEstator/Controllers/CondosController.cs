@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GoogleAPI;
+using RealEstator.Config;
 using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Condo;
+using RealEstator.Models.Home;
 using RealEstator.Services;
 
 namespace RealEstator.Controllers
@@ -44,7 +46,7 @@ namespace RealEstator.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            HomeDetailsModel home = _homeService.HomeDetails(id);
+            CondoDetailsModel home = _condoService.CondoDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
