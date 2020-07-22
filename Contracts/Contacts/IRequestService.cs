@@ -9,9 +9,9 @@ namespace RealEstator.Contacts
 {
     public interface IRequestService
     {
-        void CreateRequest(RequestCreateModel home);
+        void CreateRequest(RequestCreateModel request);
         RequestDetailsModel RequestDetails(int? id);
-        RequestEditModel EditHome(int id, RequestEditModel model);
+        bool EditRequest(RequestEditModel model);
         IEnumerable<RequestListModel> GetRequests();
         void DeleteRequest(int id);
     }

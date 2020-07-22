@@ -1,16 +1,18 @@
-﻿using RealEstator.Data;
+﻿using RealEstator.Contacts;
+using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Request;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace RealEstator.Services
 {
-    public class RequestService
+    public class RequestService : IRequestService
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public RequestService(ApplicationDbContext db)
         {
@@ -29,40 +31,58 @@ namespace RealEstator.Services
             _db.SaveChanges();
         }
 
-        public RequestDetailsModel RequestDetails(int? id, RequestDetailsModel model)
+        public IEnumerable<RequestListModel> GetRequests()
+        {
+            var entity = _db.Request.Select(
+                    e => new RequestListModel
+                    {
+                        Name = e.Name,
+                        Address = e.Address,
+                        Issue = e.Issue,
+                    }
+                );
+
+            return entity.ToList();
+        }
+
+        public RequestDetailsModel RequestDetails(int? id)
         {
             var entity = _db.Request.Single(e => e.RequestID == id);
             return new RequestDetailsModel
             {
-                RequestID = model.RequestID,
-                Name = model.Name,
-                Address = model.Address,
-                Issue = model.Issue,
+                Name = entity.Name,
+                Address = entity.Address,
+                Issue = entity.Issue,
             };
         }
 
         public void DeleteRequest(int id)
         {
-            var entity = _db.Request.Find(id);
-            _db.Request.Remove(entity);
+            var entity = _db.Home.Single(e => e.HomeID == id);
+            _db.Home.Remove(entity);
+            _db.SaveChanges();
             _db.SaveChanges();
         }
 
-        public Request EditRequest(int id, RequestEditModel model)
+        public bool EditRequest(RequestEditModel requestToEdit)
         {
-            var homeWeWantToEdit = _db.Request.Find(id);
-            if (homeWeWantToEdit != null)
+            _db.Entry(requestToEdit).State = EntityState.Modified;
+
+            var entity = _db.Request.Single(e => e.RequestID == requestToEdit.RequestID);
+            if (entity != null)
             {
-                homeWeWantToEdit.Name = model.Name;
-                homeWeWantToEdit.Address = model.Address;
-                homeWeWantToEdit.Issue = model.Issue;
-
-                _db.SaveChanges();
-
-                return homeWeWantToEdit;
+                entity.Name = requestToEdit.Name;
+                entity.Address = requestToEdit.Address;
+                entity.Issue = requestToEdit.Issue;
+                
+                return _db.SaveChanges() == 1;
             }
+            return false;
+        }
 
-            return null;
+        public RequestService()
+        {
+
         }
     }
 }
