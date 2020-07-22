@@ -34,13 +34,13 @@ namespace RealEstator.Services
                 YearBuilt = model.YearBuilt,
                 Price = model.Price,
             };
-            _db.Homes.Add(entity);
+            _db.Home.Add(entity);
             _db.SaveChanges();
         }
 
         public IEnumerable<HomeListModel> GetHomes()
         {
-            var entity = _db.Homes.Select(
+            var entity = _db.Home.Select(
                     e => new HomeListModel
                     {
                         HomeID = e.HomeID,
@@ -59,32 +59,28 @@ namespace RealEstator.Services
             return entity.ToList();
         }
 
-        public HomeDetailsModel HomeDetails(int id)
+        public HomeDetailsModel HomeDetails(int? id)
         {
-            using (var ctx = new ApplicationDbContext())
+            var entity = _db.Home.Single(e => e.HomeID == id);
+            return new HomeDetailsModel
             {
-                var entity = ctx.Homes.Single(e => e.HomeID == id);
-                return new HomeDetailsModel
-                {
-                    HomeID = entity.HomeID,
-                    Address = entity.Address,
-                    Beds = entity.Beds,
-                    Baths = entity.Baths,
-                    SquareFootage = entity.SquareFootage,
-                    HasPool = entity.HasPool,
-                    IsWaterfront = entity.IsWaterfront,
-                    Occupied = entity.Occupied,
-                    YearBuilt = entity.YearBuilt,
-                    Price = entity.Price,
-                };
-            }
-            
+                HomeID = entity.HomeID,
+                Address = entity.Address,
+                Beds = entity.Beds,
+                Baths = entity.Baths,
+                SquareFootage = entity.SquareFootage,
+                HasPool = entity.HasPool,
+                IsWaterfront = entity.IsWaterfront,
+                Occupied = entity.Occupied,
+                YearBuilt = entity.YearBuilt,
+                Price = entity.Price,
+            };
         }
 
         public void DeleteHome(int id)
         {
-            var entity = _db.Homes.Single(e => e.HomeID == id);
-            _db.Homes.Remove(entity);
+            var entity = _db.Home.Single(e => e.HomeID == id);
+            _db.Home.Remove(entity);
             _db.SaveChanges();
             _db.SaveChanges();
         }
@@ -93,7 +89,7 @@ namespace RealEstator.Services
         {
             _db.Entry(homeToEdit).State = EntityState.Modified;
 
-            var entity = _db.Homes.Single(e => e.HomeID == homeToEdit.HomeID);
+            var entity = _db.Home.Single(e => e.HomeID == homeToEdit.HomeID);
             if (entity != null)
             {
                 entity.Address = homeToEdit.Address;
@@ -109,6 +105,11 @@ namespace RealEstator.Services
                 return _db.SaveChanges() == 1;
             }
             return false;
+        }
+
+        public HomesService()
+        {
+
         }
     }
 }

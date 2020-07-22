@@ -83,6 +83,7 @@
     <Compile Include="Condo\CondoDeleteModel.cs" />
     <Compile Include="Condo\CondoDetailsModel.cs" />
     <Compile Include="Condo\CondoEditModel.cs" />
+    <Compile Include="Condo\CondoListModel.cs" />
     <Compile Include="Home\HomeCreateModel.cs" />
     <Compile Include="Home\HomeDeleteModel.cs" />
     <Compile Include="Home\HomeDetailsModel.cs" />
@@ -92,11 +93,13 @@
     <Compile Include="Request\RequestDeleteModel.cs" />
     <Compile Include="Request\RequestDetailsModel.cs" />
     <Compile Include="Request\RequestEditModel.cs" />
+    <Compile Include="Request\RequestListModel.cs" />
     <Compile Include="Townhouse\TownhouseCreateModel.cs" />
     <Compile Include="Townhouse\TownhouseDeleteModel.cs" />
     <Compile Include="Townhouse\TownhouseDetailsModel.cs" />
     <Compile Include="Townhouse\TownhouseEditModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Townhouse\TownhouseListModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

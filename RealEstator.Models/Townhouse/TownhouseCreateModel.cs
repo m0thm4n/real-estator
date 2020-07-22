@@ -2,7 +2,6 @@
 {
     public class TownhouseCreateModel
     {
-
         public string Address { get; set; }
         public int Beds { get; set; }
         public int Baths { get; set; }

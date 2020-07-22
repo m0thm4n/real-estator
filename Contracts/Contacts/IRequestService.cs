@@ -12,6 +12,7 @@ namespace RealEstator.Contacts
         void CreateRequest(RequestCreateModel home);
         RequestDetailsModel RequestDetails(int? id);
         RequestEditModel EditHome(int id, RequestEditModel model);
+        IEnumerable<RequestListModel> GetRequests();
         void DeleteRequest(int id);
     }
 }

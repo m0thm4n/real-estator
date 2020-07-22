@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RealEstator.Models.Condo
 {
-    public class CondoDeleteModel
+    public class CondoListModel
     {
         public int CondoID { get; set; }
         public string Address { get; set; }

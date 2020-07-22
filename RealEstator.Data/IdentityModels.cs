@@ -30,12 +30,12 @@ namespace RealEstator.Data
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Home> Homes { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Home> Home { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Condo> Condos { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Condo> Condo { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Townhouse> Townhouses { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Townhouse> Townhouse { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Request> Requests { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Request> Request { get; set; }
     }
 }

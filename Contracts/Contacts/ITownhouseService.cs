@@ -13,6 +13,7 @@ namespace RealEstator.Contacts
         void CreateTownhouse(TownhouseCreateModel home);
         TownhouseDetailsModel TownhouseDetails(int? id);
         TownhouseEditModel EditTownhouse(int id, TownhouseEditModel model);
+        IEnumerable<TownhouseListModel> GetTownhouses();
         void DeleteTownhouse(int? id);
     }
 }

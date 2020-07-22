@@ -11,7 +11,8 @@ namespace RealEstator.Contacts
     {
         void CreateCondo(CondoCreateModel condo);
         CondoDetailsModel CondoDetails(int? id);
-        CondoEditModel EditCondo(int id, CondoEditModel model);
-        CondoDeleteModel DeleteCondo(int? id);
+        bool EditCondo(CondoEditModel model);
+        IEnumerable<CondoListModel> GetCondos();
+        void DeleteCondo(int id);
     }
 }

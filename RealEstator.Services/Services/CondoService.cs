@@ -1,14 +1,16 @@
-﻿using RealEstator.Data;
+﻿using RealEstator.Contacts;
+using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Condo;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace RealEstator.Services
 {
-    public class CondoService
+    public class CondoService : ICondoService
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
@@ -31,14 +33,34 @@ namespace RealEstator.Services
                 YearBuilt = model.YearBuilt,
                 Price = model.Price,
             };
-            _db.Condos.Add(entity);
+            _db.Condo.Add(entity);
             _db.SaveChanges();
         }
 
+        public IEnumerable<CondoListModel> GetCondos()
+        {
+            var entity = _db.Condo.Select(
+                    e => new CondoListModel
+                    {
+                        CondoID = e.CondoID,
+                        Address = e.Address,
+                        Beds = e.Beds,
+                        Baths = e.Baths,
+                        SquareFootage = e.SquareFootage,
+                        HasPool = e.HasPool,
+                        IsWaterfront = e.IsWaterfront,
+                        Occupied = e.Occupied,
+                        YearBuilt = e.YearBuilt,
+                        Price = e.Price,
+                    }
+                );
+
+            return entity.ToList();
+        }
 
         public CondoDetailsModel CondoDetails(int? id)
         {
-            var entity = _db.Condos
+            var entity = _db.Condo
                 .Single(e => e.CondoID == id);
             return new CondoDetailsModel
             {
@@ -55,36 +77,38 @@ namespace RealEstator.Services
             };
         }
 
-        public Condo DeleteCondo(int? id)
+        public void DeleteCondo(int id)
         {
-            var entity = _db.Condos.Find(id);
-            _db.Condos.Remove(entity);
+            var entity = _db.Condo.Single(e => e.CondoID == id);
+            _db.Condo.Remove(entity);
             _db.SaveChanges();
-
-            return entity;
         }
 
-        public Condo EditCondo(int id, CondoEditModel model)
+        public bool EditCondo(CondoEditModel condoToEdit)
         {
-            var condoWeWantToEdit = _db.Condos.Find(id);
-            if (condoWeWantToEdit != null)
+            _db.Entry(condoToEdit).State = EntityState.Modified;
+
+            var entity = _db.Home.Single(e => e.HomeID == condoToEdit.CondoID);
+            if (entity != null)
             {
-                condoWeWantToEdit.Address = model.Address;
-                condoWeWantToEdit.Beds = model.Beds;
-                condoWeWantToEdit.Baths = model.Baths;
-                condoWeWantToEdit.SquareFootage = model.SquareFootage;
-                condoWeWantToEdit.HasPool = model.HasPool;
-                condoWeWantToEdit.IsWaterfront = model.IsWaterfront;
-                condoWeWantToEdit.Occupied = model.Occupied;
-                condoWeWantToEdit.YearBuilt = model.YearBuilt;
-                condoWeWantToEdit.Price = model.Price;
+                entity.Address = condoToEdit.Address;
+                entity.Beds = condoToEdit.Beds;
+                entity.Baths = condoToEdit.Baths;
+                entity.SquareFootage = condoToEdit.SquareFootage;
+                entity.HasPool = condoToEdit.HasPool;
+                entity.IsWaterfront = condoToEdit.IsWaterfront;
+                entity.Occupied = condoToEdit.Occupied;
+                entity.YearBuilt = condoToEdit.YearBuilt;
+                entity.Price = condoToEdit.Price;
 
-                _db.SaveChanges();
-
-                return condoWeWantToEdit;
+                return _db.SaveChanges() == 1;
             }
+            return false;
+        }
 
-            return null;
+        public CondoService()
+        {
+
         }
     }
 }

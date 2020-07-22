@@ -88,9 +88,9 @@
     <Compile Include="Data\Home.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="ManageViewModels.cs" />
-    <Compile Include="Migrations\202007201849008_InitialCreate.cs" />
-    <Compile Include="Migrations\202007201849008_InitialCreate.Designer.cs">
-      <DependentUpon>202007201849008_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202007211659441_InitialCreate.cs" />
+    <Compile Include="Migrations\202007211659441_InitialCreate.Designer.cs">
+      <DependentUpon>202007211659441_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\Request.cs" />
@@ -102,8 +102,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007201849008_InitialCreate.resx">
-      <DependentUpon>202007201849008_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007211659441_InitialCreate.resx">
+      <DependentUpon>202007211659441_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

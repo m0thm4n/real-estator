@@ -25,13 +25,13 @@ namespace RealEstator.Services
                 Address = model.Address,
                 Issue = model.Issue,
             };
-            _db.Requests.Add(entity);
+            _db.Request.Add(entity);
             _db.SaveChanges();
         }
 
         public RequestDetailsModel RequestDetails(int? id, RequestDetailsModel model)
         {
-            var entity = _db.Requests.Single(e => e.RequestID == id);
+            var entity = _db.Request.Single(e => e.RequestID == id);
             return new RequestDetailsModel
             {
                 RequestID = model.RequestID,
@@ -43,14 +43,14 @@ namespace RealEstator.Services
 
         public void DeleteRequest(int id)
         {
-            var entity = _db.Homes.Find(id);
-            _db.Homes.Remove(entity);
+            var entity = _db.Request.Find(id);
+            _db.Request.Remove(entity);
             _db.SaveChanges();
         }
 
         public Request EditRequest(int id, RequestEditModel model)
         {
-            var homeWeWantToEdit = _db.Requests.Find(id);
+            var homeWeWantToEdit = _db.Request.Find(id);
             if (homeWeWantToEdit != null)
             {
                 homeWeWantToEdit.Name = model.Name;

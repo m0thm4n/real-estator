@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.MVC", "RealEstator\RealEstator.MVC.csproj", "{74185A70-7437-4094-9B93-69A57D045FB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.GoogleAPI", "GoogleAPI\RealEstator.GoogleAPI.csproj", "{D5FC19BD-7678-46D4-8B70-49AE0CA76BC0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.Services", "RealEstator.Services\RealEstator.Services.csproj", "{0683F722-8BAF-4779-A62C-B042C6AA2183}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.Data", "RealEstator.Data\RealEstator.Data.csproj", "{3D0F4602-9E60-4C7F-9EDF-1C1378093A66}"
@@ -27,10 +25,6 @@ Global
 		{74185A70-7437-4094-9B93-69A57D045FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74185A70-7437-4094-9B93-69A57D045FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74185A70-7437-4094-9B93-69A57D045FB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5FC19BD-7678-46D4-8B70-49AE0CA76BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5FC19BD-7678-46D4-8B70-49AE0CA76BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5FC19BD-7678-46D4-8B70-49AE0CA76BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5FC19BD-7678-46D4-8B70-49AE0CA76BC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0683F722-8BAF-4779-A62C-B042C6AA2183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0683F722-8BAF-4779-A62C-B042C6AA2183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0683F722-8BAF-4779-A62C-B042C6AA2183}.Release|Any CPU.ActiveCfg = Release|Any CPU

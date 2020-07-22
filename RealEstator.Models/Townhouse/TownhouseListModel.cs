@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace RealEstator.Models.Condo
+namespace RealEstator.Models.Townhouse
 {
-    public class CondoDeleteModel
+    public class TownhouseListModel
     {
-        public int CondoID { get; set; }
         public string Address { get; set; }
         public int Beds { get; set; }
         public int Baths { get; set; }

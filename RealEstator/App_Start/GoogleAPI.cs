@@ -23,6 +23,6 @@ namespace GoogleAPI
             return map;
         }
 
-        public GoogleMaps()
+        public GoogleMaps() { }
     }
 }

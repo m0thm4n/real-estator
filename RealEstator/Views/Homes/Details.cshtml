@@ -1,4 +1,4 @@
-﻿@model RealEstator.Data.Home
+﻿@model RealEstator.Models.Home.HomeDetailsModel
 
 @{
     ViewBag.Title = "Details";
@@ -15,7 +15,7 @@
     <h2>MAP INTEGRATION</h2>
 </div>
 
-<img src="@ViewBag["StaticMapUri"]" alt="Static Map Image" />
+<img src=@ViewBag.Static alt="Static Map Image" />
 
 <h4>Home</h4>
 <hr />
@@ -93,7 +93,6 @@
     </dd>
 
 </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.HomeID }) |
     @Html.ActionLink("Back to List", "Index")

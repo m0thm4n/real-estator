@@ -12,7 +12,7 @@ namespace RealEstator.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ApplicationDbContext context)
@@ -22,11 +22,11 @@ namespace RealEstator.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            context.Condos.AddOrUpdate(x => x.CondoID,
+            context.Condo.AddOrUpdate(x => x.CondoID,
                 new Condo()
                 {
                     CondoID = 1,
-                    Address = "4124 Oliver Ave",
+                    Address = "4124 Oliver Ave, Indianapolis, IN 46241",
                     Beds = 1,
                     Baths = 1,
                     SquareFootage = 500,
@@ -37,11 +37,11 @@ namespace RealEstator.Migrations
                     Price = 100,
                 });
 
-            context.Homes.AddOrUpdate(x => x.HomeID,
+            context.Home.AddOrUpdate(x => x.HomeID,
                 new Home()
                 {
                     HomeID = 1,
-                    Address = "4124 Oliver Ave",
+                    Address = "4124 Oliver Ave, Indianapolis, IN 46241",
                     Beds = 2,
                     Baths = 2,
                     SquareFootage = 1050,
@@ -52,11 +52,11 @@ namespace RealEstator.Migrations
                     Price = 500,
                 });
 
-            context.Townhouses.AddOrUpdate(x => x.TownhouseID,
+            context.Townhouse.AddOrUpdate(x => x.TownhouseID,
                 new Townhouse()
                 {
                     TownhouseID = 1,
-                    Address = "4124 Oliver Ave",
+                    Address = "4124 Oliver Ave, Indianapolis, IN 46241",
                     Beds = 2,
                     Baths = 1,
                     SquareFootage = 860,
@@ -67,7 +67,7 @@ namespace RealEstator.Migrations
                     Price = 1050,
                 });
 
-            context.Requests.AddOrUpdate(x => x.RequestID,
+            context.Request.AddOrUpdate(x => x.RequestID,
                 new Request()
                 {
                     RequestID = 1,

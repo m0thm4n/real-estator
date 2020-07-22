@@ -7,28 +7,29 @@ using RealEstator.Data;
 using RealEstator.Models.Home;
 using GoogleAPI;
 using RealEstator.Config;
+using RealEstator.Services;
 
 namespace RealEstator.Controllers
 {
     public class HomesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private IHomesService homeService;
-        private GoogleMaps google;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly IHomesService _homeService = new HomesService();
+        private GoogleMaps _google = new GoogleMaps();
 
         public HomesController() { }
         public HomesController(IHomesService homeService, ApplicationDbContext db, GoogleMaps google)
         {
-            this.homeService = homeService;
-            this.db = db;
-            this.google = google;
+            _homeService = homeService;
+            _db = db;
+            _google = google;
         }
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes
         public ActionResult Index()
         {
-            return View(db.Homes.ToList());
+            return View(_homeService.GetHomes());
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -39,20 +40,18 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            using (ApplicationDbContext db = new ApplicationDbContext())
+
+            HomeDetailsModel home = _homeService.HomeDetails(id);
+            if (home == null)
             {
-                Home home = db.Homes.Find(id);
-                if (home == null)
-                {
-                    return HttpNotFound();
-                }
-
-                var apiKey = GetConfig.LoadConfig();
-
-                var map = google.GetMaps(apiKey, home.Address);
-                ViewBag["StaticMapUri"] = map.ToUri();
-                return View(home);
+                return HttpNotFound();
             }
+
+            var apiKey = GetConfig.LoadConfig();
+
+            var map = _google.GetMaps(apiKey, home.Address);
+            ViewBag.Static = map.ToUri();
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -72,7 +71,7 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                homeService.CreateHome(home);
+                _homeService.CreateHome(home);
                 return RedirectToAction("Index");
             }
 
@@ -83,7 +82,7 @@ namespace RealEstator.Controllers
         // GET: Homes/Edit/5
         public ActionResult Edit(int id)
         {
-            var home = homeService.HomeDetails(id);
+            var home = _homeService.HomeDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -108,7 +107,7 @@ namespace RealEstator.Controllers
                 return View(homeToEdit);
             }
 
-            if (homeService.EditHome(homeToEdit))
+            if (_homeService.EditHome(homeToEdit))
             {
                 TempData["SaveResult"] = "You have updated your house.";
                 return RedirectToAction("Index");
@@ -126,7 +125,7 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Home home = db.Homes.Find(id);
+            HomeDetailsModel home = _homeService.HomeDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
@@ -140,6 +139,8 @@ namespace RealEstator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            _homeService.DeleteHome(id);
+
             return RedirectToAction("Index");
         }
 
@@ -147,7 +148,7 @@ namespace RealEstator.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

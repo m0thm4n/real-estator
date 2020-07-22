@@ -31,14 +31,14 @@ namespace RealEstator.Services
                 YearBuilt = model.YearBuilt,
                 Price = model.Price,
             };
-            _db.Townhouses.Add(entity);
+            _db.Townhouse.Add(entity);
             _db.SaveChanges();
         }
 
 
         public TownhouseDetailsModel TownhouseDetails(int? id)
         {
-            var entity = _db.Townhouses.Single(e => e.TownhouseID == id);
+            var entity = _db.Townhouse.Single(e => e.TownhouseID == id);
             return new TownhouseDetailsModel
             {
                 HomeID = entity.TownhouseID,
@@ -56,8 +56,8 @@ namespace RealEstator.Services
 
         public Townhouse DeleteTownhouse(int? id)
         {
-            var entity = _db.Townhouses.Find(id);
-            _db.Townhouses.Remove(entity);
+            var entity = _db.Townhouse.Find(id);
+            _db.Townhouse.Remove(entity);
             _db.SaveChanges();
 
             return entity;
@@ -65,7 +65,7 @@ namespace RealEstator.Services
 
         public Townhouse EditTownhouse(int id, TownhouseEditModel model)
         {
-            var townhouseWeWantToEdit = _db.Townhouses.Find(id);
+            var townhouseWeWantToEdit = _db.Townhouse.Find(id);
             if (townhouseWeWantToEdit != null)
             {
                 townhouseWeWantToEdit.Address = model.Address;

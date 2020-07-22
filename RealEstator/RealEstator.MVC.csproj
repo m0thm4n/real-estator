@@ -187,6 +187,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
+    <Compile Include="App_Start\GoogleAPI.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -421,10 +422,6 @@
     <ProjectReference Include="..\Contracts\RealEstator.Contracts.csproj">
       <Project>{C4FE3269-73D4-4E20-8AA1-A79938E8B151}</Project>
       <Name>RealEstator.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GoogleAPI\RealEstator.GoogleAPI.csproj">
-      <Project>{d5fc19bd-7678-46d4-8b70-49ae0ca76bc0}</Project>
-      <Name>RealEstator.GoogleAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\RealEstator.Config\RealEstator.Config.csproj">
       <Project>{94f0f77f-e2d9-49be-8728-01ac37c7c4c5}</Project>

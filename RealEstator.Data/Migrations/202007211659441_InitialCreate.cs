@@ -8,7 +8,7 @@ namespace RealEstator.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Condos",
+                "dbo.Condoes",
                 c => new
                     {
                         CondoID = c.Int(nullable: false, identity: true),
