@@ -2,7 +2,6 @@
 using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Home;
-using RealEstator.Models.Models.Home;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;

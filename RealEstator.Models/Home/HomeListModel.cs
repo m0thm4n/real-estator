@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealEstator.Models.Models.Home
+namespace RealEstator.Models.Home
 {
     public class HomeListModel
     {
