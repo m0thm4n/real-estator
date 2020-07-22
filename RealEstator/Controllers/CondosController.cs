@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GoogleAPI;
 using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models;
@@ -18,11 +19,13 @@ namespace RealEstator.Controllers
     {
         private readonly ICondoService _condoService = new CondoService();
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private GoogleMaps _google = new GoogleMaps();
 
-        public CondosController(ICondoService condoService, ApplicationDbContext db)
+        public CondosController(ICondoService condoService, ApplicationDbContext db, GoogleMaps google)
         {
             _condoService = condoService;
             _db = db;
+            _google = google;
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -40,12 +43,18 @@ namespace RealEstator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CondoDetailsModel condo = _condoService.CondoDetails(id);
-            if (condo == null)
+
+            HomeDetailsModel home = _homeService.HomeDetails(id);
+            if (home == null)
             {
                 return HttpNotFound();
             }
-            return View(condo);
+
+            var apiKey = GetConfig.LoadConfig();
+
+            var map = _google.GetMaps(apiKey, home.Address);
+            ViewBag.Static = map.ToUri();
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]

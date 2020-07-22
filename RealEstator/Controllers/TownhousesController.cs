@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GoogleAPI;
+using RealEstator.Config;
 using RealEstator.Contacts;
 using RealEstator.Data;
 using RealEstator.Models;
@@ -15,122 +17,136 @@ namespace RealEstator.Controllers
 {
     public class TownhousesController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
-        private ITownhouseService _townhouseService;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ITownhouseService _townhouseService = new TownhouseService();
+        private GoogleMaps _google = new GoogleMaps();
 
         public TownhousesController() { }
-        public TownhousesController(ITownhouseService townhouseService, ApplicationDbContext db)
+        public TownhousesController(ITownhouseService townhouseService, ApplicationDbContext db, GoogleMaps google)
         {
             _townhouseService = townhouseService;
             _db = db;
+            _google = google;
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Townhouses
+        // GET: Homes
         public ActionResult Index()
         {
-            return View(_db.Townhouses.ToList());
+            return View(_townhouseService.GetTownhouses());
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Townhouses/Details/5
+        // GET: Homes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Townhouse townhouse = _db.Townhouses.Find(id);
-            if (townhouse == null)
+
+            TownhouseDetailsModel home = _townhouseService.TownhouseDetails(id);
+            if (home == null)
             {
                 return HttpNotFound();
             }
-            return View(townhouse);
+
+            var apiKey = GetConfig.LoadConfig();
+
+            var map = _google.GetMaps(apiKey, home.Address);
+            ViewBag.Static = map.ToUri();
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Townhouses/Create
+        // GET: Homes/Create
         public ActionResult Create()
         {
-            return View(new Townhouse());
+            return View(new Home());
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // POST: Townhouses/Create
+        // POST: Homes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TownhouseCreateModel townhouse)
+        public ActionResult Create(TownhouseCreateModel home)
         {
             if (ModelState.IsValid)
             {
-                _townhouseService.CreateTownhouse(townhouse);
+                _townhouseService.CreateTownhouse(home);
                 return RedirectToAction("Index");
             }
 
-            return View(townhouse);
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Townhouses/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Homes/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Townhouse townhouse = _db.Townhouses.Find(id);
-            if (townhouse == null)
+            var home = _townhouseService.TownhouseDetails(id);
+            if (home == null)
             {
                 return HttpNotFound();
             }
-            return View(townhouse);
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // POST: Townhouses/Edit/5
+        // POST: Homes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, TownhouseEditModel townhouse)
+        public ActionResult Edit(int id, TownhouseEditModel townhouseToEdit)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(townhouseToEdit);
+
+
+            if (townhouseToEdit.TownhouseID != id)
             {
-                _db.Entry(townhouse).State = EntityState.Modified;
-                _townhouseService.EditTownhouse(id, townhouse);
+                ModelState.AddModelError("", "ID does not match an existing home, please try again.");
+                return View(townhouseToEdit);
+            }
+
+            if (_townhouseService.EditTownhouse(townhouseToEdit))
+            {
+                TempData["SaveResult"] = "You have updated your house.";
                 return RedirectToAction("Index");
             }
-            return View(townhouse);
+
+            ModelState.AddModelError("", "Could not update home.");
+            return View(townhouseToEdit);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Townhouses/Delete/5
+        // GET: Homes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Townhouse townhouse = _db.Townhouses.Find(id);
-            if (townhouse == null)
+            TownhouseDetailsModel home = _townhouseService.TownhouseDetails(id);
+            if (home == null)
             {
                 return HttpNotFound();
             }
-            return View(townhouse);
+            return View(home);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // POST: Townhouses/Delete/5
+        // POST: Homes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _townhouseService.DeleteTownhouse(id);
+
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

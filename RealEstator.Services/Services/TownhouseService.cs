@@ -1,14 +1,16 @@
-﻿using RealEstator.Data;
+﻿using RealEstator.Contacts;
+using RealEstator.Data;
 using RealEstator.Models;
 using RealEstator.Models.Townhouse;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace RealEstator.Services
 {
-    public class TownhouseService
+    public class TownhouseService : ITownhouseService
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
@@ -35,13 +37,33 @@ namespace RealEstator.Services
             _db.SaveChanges();
         }
 
+        public IEnumerable<TownhouseListModel> GetTownhouses()
+        {
+            var entity = _db.Townhouse.Select(
+                    e => new TownhouseListModel
+                    {
+                        TownhouseID = e.TownhouseID,
+                        Address = e.Address,
+                        Beds = e.Beds,
+                        Baths = e.Baths,
+                        SquareFootage = e.SquareFootage,
+                        HasPool = e.HasPool,
+                        IsWaterfront = e.IsWaterfront,
+                        Occupied = e.Occupied,
+                        YearBuilt = e.YearBuilt,
+                        Price = e.Price,
+                    }
+                );
+
+            return entity.ToList();
+        }
 
         public TownhouseDetailsModel TownhouseDetails(int? id)
         {
             var entity = _db.Townhouse.Single(e => e.TownhouseID == id);
             return new TownhouseDetailsModel
             {
-                HomeID = entity.TownhouseID,
+                TownhouseID = entity.TownhouseID,
                 Address = entity.Address,
                 Beds = entity.Beds,
                 Baths = entity.Baths,
@@ -54,36 +76,39 @@ namespace RealEstator.Services
             };
         }
 
-        public Townhouse DeleteTownhouse(int? id)
+        public void DeleteTownhouse(int id)
         {
-            var entity = _db.Townhouse.Find(id);
+            var entity = _db.Townhouse.Single(e => e.TownhouseID == id);
             _db.Townhouse.Remove(entity);
             _db.SaveChanges();
-
-            return entity;
+            _db.SaveChanges();
         }
 
-        public Townhouse EditTownhouse(int id, TownhouseEditModel model)
+        public bool EditTownhouse(TownhouseEditModel townhouseToEdit)
         {
-            var townhouseWeWantToEdit = _db.Townhouse.Find(id);
-            if (townhouseWeWantToEdit != null)
+            _db.Entry(townhouseToEdit).State = EntityState.Modified;
+
+            var entity = _db.Home.Single(e => e.HomeID == townhouseToEdit.TownhouseID);
+            if (entity != null)
             {
-                townhouseWeWantToEdit.Address = model.Address;
-                townhouseWeWantToEdit.Beds = model.Beds;
-                townhouseWeWantToEdit.Baths = model.Baths;
-                townhouseWeWantToEdit.SquareFootage = model.SquareFootage;
-                townhouseWeWantToEdit.HasPool = model.HasPool;
-                townhouseWeWantToEdit.IsWaterfront = model.IsWaterfront;
-                townhouseWeWantToEdit.Occupied = model.Occupied;
-                townhouseWeWantToEdit.YearBuilt = model.YearBuilt;
-                townhouseWeWantToEdit.Price = model.Price;
+                entity.Address = townhouseToEdit.Address;
+                entity.Beds = townhouseToEdit.Beds;
+                entity.Baths = townhouseToEdit.Baths;
+                entity.SquareFootage = townhouseToEdit.SquareFootage;
+                entity.HasPool = townhouseToEdit.HasPool;
+                entity.IsWaterfront = townhouseToEdit.IsWaterfront;
+                entity.Occupied = townhouseToEdit.Occupied;
+                entity.YearBuilt = townhouseToEdit.YearBuilt;
+                entity.Price = townhouseToEdit.Price;
 
-                _db.SaveChanges();
-
-                return townhouseWeWantToEdit;
+                return _db.SaveChanges() == 1;
             }
+            return false;
+        }
 
-            return null;
+        public TownhouseService()
+        {
+               
         }
     }
 }

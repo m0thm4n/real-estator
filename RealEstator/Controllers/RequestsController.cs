@@ -22,7 +22,7 @@ namespace RealEstator.Controllers
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
         private GoogleMaps _google = new GoogleMaps();
 
-        public HomesController(IRequestService requestService, ApplicationDbContext db, GoogleMaps google)
+        public RequestsController(IRequestService requestService, ApplicationDbContext db, GoogleMaps google)
         {
             _requestService = requestService;
             _db = db;

@@ -7,7 +7,7 @@ namespace RealEstator.Models.Townhouse
 {
     public class TownhouseDetailsModel
     {
-        public int HomeID { get; set; }
+        public int TownhouseID { get; set; }
         public string Address { get; set; } = string.Empty;
         public int Beds { get; set; }
         public int Baths { get; set; }
