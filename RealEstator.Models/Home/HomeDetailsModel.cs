@@ -8,6 +8,7 @@ namespace RealEstator.Models.Home
 {
     public class HomeDetailsModel
     {
+        [Key]
         public int HomeID { get; set; }
         public string Address { get; set; } = string.Empty;
         public int Beds { get; set; }

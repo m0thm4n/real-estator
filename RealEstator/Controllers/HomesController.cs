@@ -82,12 +82,25 @@ namespace RealEstator.Controllers
         // GET: Homes/Edit/5
         public ActionResult Edit(int id)
         {
-            var home = _homeService.HomeDetails(id);
+            HomeDetailsModel home = _homeService.HomeDetails(id);
             if (home == null)
             {
                 return HttpNotFound();
             }
-            return View(home);
+            var model = new HomeEditModel
+            {
+                HomeID = home.HomeID,
+                Address = home.Address,
+                Beds = home.Beds,
+                Baths = home.Baths,
+                SquareFootage = home.SquareFootage,
+                HasPool = home.HasPool,
+                IsWaterfront = home.IsWaterfront,
+                Occupied = home.Occupied,
+                YearBuilt = home.YearBuilt,
+                Price = home.Price,
+            };
+            return View(model);
         }
 
         [Authorize(Roles = "Renter,Admin")]
