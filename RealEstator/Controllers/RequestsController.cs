@@ -71,27 +71,42 @@ namespace RealEstator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RequestCreateModel home)
+        public ActionResult Create(RequestCreateModel request)
         {
             if (ModelState.IsValid)
             {
-                _requestService.CreateRequest(home);
+                _requestService.CreateRequest(request);
                 return RedirectToAction("Index");
             }
 
-            return View(home);
+            return View(request);
         }
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            var home = _requestService.RequestDetails(id);
-            if (home == null)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RequestDetailsModel request = _requestService.RequestDetails(id);
+            if (request == null)
             {
                 return HttpNotFound();
             }
-            return View(home);
+            var model = new RequestEditModel
+            {
+                RequestID = request.RequestID,
+                Name = request.Name,
+                Address = request.Address,
+                Issue = request.Issue,
+            };
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         [Authorize(Roles = "Renter,Admin")]

@@ -84,14 +84,35 @@ namespace RealEstator.Controllers
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            var home = _townhouseService.TownhouseDetails(id);
-            if (home == null)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TownhouseDetailsModel townhouse = _townhouseService.TownhouseDetails(id);
+            if (townhouse == null)
             {
                 return HttpNotFound();
             }
-            return View(home);
+            var model = new TownhouseEditModel
+            {
+                TownhouseID = townhouse.TownhouseID,
+                Address = townhouse.Address,
+                Beds = townhouse.Beds,
+                Baths = townhouse.Baths,
+                SquareFootage = townhouse.SquareFootage,
+                HasPool = townhouse.HasPool,
+                IsWaterfront = townhouse.IsWaterfront,
+                Occupied = townhouse.Occupied,
+                YearBuilt = townhouse.YearBuilt,
+                Price = townhouse.Price,
+            };
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         [Authorize(Roles = "Renter,Admin")]

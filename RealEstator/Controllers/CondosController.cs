@@ -96,7 +96,24 @@ namespace RealEstator.Controllers
             {
                 return HttpNotFound();
             }
-            return View(condo);
+            var model = new CondoEditModel
+            {
+                CondoID = condo.CondoID,
+                Address = condo.Address,
+                Beds = condo.Beds,
+                Baths = condo.Baths,
+                SquareFootage = condo.SquareFootage,
+                HasPool = condo.HasPool,
+                IsWaterfront = condo.IsWaterfront,
+                Occupied = condo.Occupied,
+                YearBuilt = condo.YearBuilt,
+                Price = condo.Price,
+            };
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         [Authorize(Roles = "Renter,Admin")]
