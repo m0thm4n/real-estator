@@ -54,7 +54,10 @@ namespace RealEstator.Controllers
             var apiKey = GetConfig.LoadConfig();
 
             var map = _google.GetMaps(apiKey, home.Address);
-            ViewBag.Static = map.ToUri();
+            var url = map.ToUri().AbsoluteUri;
+
+            url += "&key=" + apiKey;
+            ViewBag.Static = url.Replace("%20", "+").Replace("%2C", ",");
             return View(home);
         }
 

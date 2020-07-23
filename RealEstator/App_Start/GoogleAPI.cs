@@ -17,8 +17,8 @@ namespace GoogleAPI
 
             var map = new StaticMapRequest();
             map.Center = new Location(address);
-            map.Size = new System.Drawing.Size(400, 400);
-            map.Zoom = 14;
+            map.Size = new System.Drawing.Size(600, 600);
+            map.Zoom = 10;
 
             return map;
         }
