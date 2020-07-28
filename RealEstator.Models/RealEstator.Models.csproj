@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountViewModels.cs" />
     <Compile Include="Condo\CondoCreateModel.cs" />
     <Compile Include="Condo\CondoDeleteModel.cs" />
     <Compile Include="Condo\CondoDetailsModel.cs" />

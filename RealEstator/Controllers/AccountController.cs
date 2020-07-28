@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RealEstator.Data;
+using RealEstator.Models;
 
 namespace RealEstator.Controllers
 {
@@ -18,15 +19,17 @@ namespace RealEstator.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext db)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _db = db;
         }
 
         public ApplicationSignInManager SignInManager
@@ -138,9 +141,11 @@ namespace RealEstator.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register() //RegisterViewModel model
         {
-            return View();
+            ViewBag.Name = new SelectList(_db.Roles.Where(u => !u.Name.Contains("Admin"))
+                                            .ToList(), "Name", "Name");
+            return View(new RegisterViewModel());
         }
 
         //
@@ -152,7 +157,7 @@ namespace RealEstator.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -164,8 +169,12 @@ namespace RealEstator.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    await this.UserManager.AddToRolesAsync(user.Id, model.UserRoles);
+
+                    return RedirectToAction("Index", "Users");
                 }
+                ViewBag.Name = new SelectList(_db.Roles.Where(u => !u.Name.Contains("Administrator")));
+
                 AddErrors(result);
             }
 

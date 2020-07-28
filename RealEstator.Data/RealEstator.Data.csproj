@@ -85,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AccountViewModels.cs" />
     <Compile Include="Entities\Condo.cs" />
     <Compile Include="Entities\Home.cs" />
     <Compile Include="IdentityModels.cs" />

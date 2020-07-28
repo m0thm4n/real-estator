@@ -48,7 +48,7 @@ namespace RealEstator.Controllers
                 return HttpNotFound();
             }
 
-            var apiKey = Config.LoadConfig();
+            var apiKey = GetConfig.LoadConfig();
 
             var map = _google.GetMaps(apiKey, home.Address);
             var url = map.ToUri().AbsoluteUri;
