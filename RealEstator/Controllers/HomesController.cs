@@ -8,6 +8,7 @@ using RealEstator.Models.Home;
 using GoogleAPI;
 using RealEstator.Config;
 using RealEstator.Services;
+using RealEstator.Data.Entities;
 
 namespace RealEstator.Controllers
 {
@@ -47,7 +48,7 @@ namespace RealEstator.Controllers
                 return HttpNotFound();
             }
 
-            var apiKey = GetConfig.LoadConfig();
+            var apiKey = Config.LoadConfig();
 
             var map = _google.GetMaps(apiKey, home.Address);
             var url = map.ToUri().AbsoluteUri;
@@ -61,7 +62,7 @@ namespace RealEstator.Controllers
         // GET: Homes/Create
         public ActionResult Create()
         {
-            return View(new Home());
+            return View(new HomeCreateModel());
         }
 
         [Authorize(Roles = "Renter,Admin")]

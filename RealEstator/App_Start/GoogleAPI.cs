@@ -13,12 +13,15 @@ namespace GoogleAPI
     {
         public StaticMapRequest GetMaps(string apiKey, string address)
         {
+            GoogleMaps google = new GoogleMaps();
+
             GoogleSigned.AssignAllServices(new GoogleSigned(apiKey));
 
             var map = new StaticMapRequest();
             map.Center = new Location(address);
             map.Size = new System.Drawing.Size(600, 600);
             map.Zoom = 10;
+            map.Markers.Add(address);
 
             return map;
         }

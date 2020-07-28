@@ -66,7 +66,7 @@ namespace RealEstator.Controllers
         // GET: Condoes/Create
         public ActionResult Create()
         {
-            return View(new Condo());
+            return View(new CondoCreateModel());
         }
         
         [Authorize(Roles = "Renter,Admin")]

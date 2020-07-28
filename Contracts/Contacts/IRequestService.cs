@@ -10,7 +10,7 @@ namespace RealEstator.Contacts
     public interface IRequestService
     {
         void CreateRequest(RequestCreateModel request);
-        RequestDetailsModel RequestDetails(int? id);
+        RequestDetailsModel RequestDetails(int id);
         bool EditRequest(RequestEditModel model);
         IEnumerable<RequestListModel> GetRequests();
         void DeleteRequest(int id);

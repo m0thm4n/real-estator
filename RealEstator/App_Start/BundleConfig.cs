@@ -23,8 +23,8 @@ namespace RealEstator
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/flatly.bootstrap.css",
-                      "~/Content/site.css"));
+                                 "~/Content/flatly.bootstrap.css",
+                                 "~/Content/site.css"));
         }
     }
 }

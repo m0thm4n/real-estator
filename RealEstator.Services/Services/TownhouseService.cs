@@ -1,5 +1,6 @@
 ﻿using RealEstator.Contacts;
 using RealEstator.Data;
+using RealEstator.Data.Entities;
 using RealEstator.Models;
 using RealEstator.Models.Townhouse;
 using System;

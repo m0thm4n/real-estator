@@ -9,6 +9,7 @@ using GoogleAPI;
 using RealEstator.Config;
 using RealEstator.Contacts;
 using RealEstator.Data;
+using RealEstator.Data.Entities;
 using RealEstator.Models;
 using RealEstator.Models.Townhouse;
 using RealEstator.Services;
@@ -65,7 +66,7 @@ namespace RealEstator.Controllers
         // GET: Homes/Create
         public ActionResult Create()
         {
-            return View(new Home());
+            return View(new Townhouse());
         }
 
         [Authorize(Roles = "Renter,Admin")]

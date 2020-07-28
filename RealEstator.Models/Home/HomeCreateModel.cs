@@ -1,4 +1,6 @@
-﻿namespace RealEstator.Models.Home
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RealEstator.Models.Home
 {
     public class HomeCreateModel
     {

@@ -1,18 +1,16 @@
-using Microsoft.Owin.BuilderProperties;
-using RealEstator.Data;
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
-
-namespace RealEstator.Migrations
+﻿namespace RealEstator.Data.Migrations
 {
+    using RealEstator.Data.Entities;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RealEstator.Data.ApplicationDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(ApplicationDbContext context)
@@ -35,6 +33,7 @@ namespace RealEstator.Migrations
                     Occupied = true,
                     YearBuilt = 1900,
                     Price = 100,
+                    RequestID = 1,
                 });
 
             context.Home.AddOrUpdate(x => x.HomeID,
@@ -50,6 +49,7 @@ namespace RealEstator.Migrations
                     Occupied = false,
                     YearBuilt = 1990,
                     Price = 500,
+                    RequestID = 1,
                 });
 
             context.Townhouse.AddOrUpdate(x => x.TownhouseID,
@@ -65,6 +65,7 @@ namespace RealEstator.Migrations
                     Occupied = true,
                     YearBuilt = 2001,
                     Price = 1050,
+                    RequestID = 1,
                 });
 
             context.Request.AddOrUpdate(x => x.RequestID,
@@ -72,6 +73,13 @@ namespace RealEstator.Migrations
                 {
                     RequestID = 1,
                     Name = "Timmy",
+                    Address = "4124 Oliver Ave",
+                    Issue = "A/C is not working",
+                },
+                new Request()
+                {
+                RequestID = 2,
+                    Name = "Nathan",
                     Address = "4124 Oliver Ave",
                     Issue = "A/C is not working",
                 });

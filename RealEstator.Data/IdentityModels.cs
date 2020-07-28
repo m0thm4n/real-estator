@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -30,12 +29,12 @@ namespace RealEstator.Data
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Home> Home { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Entities.Home> Home { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Condo> Condo { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Entities.Condo> Condo { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Townhouse> Townhouse { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Entities.Townhouse> Townhouse { get; set; }
 
-        public System.Data.Entity.DbSet<RealEstator.Data.Request> Request { get; set; }
+        public System.Data.Entity.DbSet<RealEstator.Data.Entities.Request> Request { get; set; }
     }
 }

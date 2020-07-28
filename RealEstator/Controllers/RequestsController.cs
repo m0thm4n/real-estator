@@ -10,6 +10,7 @@ using GoogleAPI;
 using RealEstator.Config;
 using RealEstator.Contacts;
 using RealEstator.Data;
+using RealEstator.Data.Entities;
 using RealEstator.Models;
 using RealEstator.Models.Request;
 using RealEstator.Services;
@@ -18,15 +19,17 @@ namespace RealEstator.Controllers
 {
     public class RequestsController : Controller
     {
-        private readonly IRequestService _requestService = new RequestService();
+        private readonly IRequestService _requestService = new RequestsService();
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-        private GoogleMaps _google = new GoogleMaps();
 
-        public RequestsController(IRequestService requestService, ApplicationDbContext db, GoogleMaps google)
+        public RequestsController()
+        {
+
+        }
+        public RequestsController(IRequestService requestService, ApplicationDbContext db)
         {
             _requestService = requestService;
             _db = db;
-            _google = google;
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -38,31 +41,21 @@ namespace RealEstator.Controllers
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            RequestDetailsModel home = _requestService.RequestDetails(id);
-            if (home == null)
+            RequestDetailsModel request = _requestService.RequestDetails(id);
+            if (request == null)
             {
                 return HttpNotFound();
             }
-
-            var apiKey = GetConfig.LoadConfig();
-
-            var map = _google.GetMaps(apiKey, home.Address);
-            ViewBag.Static = map.ToUri();
-            return View(home);
+            return View(request);
         }
 
         [Authorize(Roles = "Renter,Admin")]
-        // GET: Homes/Create
+        // GET: Request/Create
         public ActionResult Create()
         {
-            return View(new Home());
+            return View(new RequestCreateModel());
         }
 
         [Authorize(Roles = "Renter,Admin")]
@@ -84,12 +77,8 @@ namespace RealEstator.Controllers
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             RequestDetailsModel request = _requestService.RequestDetails(id);
             if (request == null)
             {
@@ -138,12 +127,8 @@ namespace RealEstator.Controllers
 
         [Authorize(Roles = "Renter,Admin")]
         // GET: Homes/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             RequestDetailsModel home = _requestService.RequestDetails(id);
             if (home == null)
             {

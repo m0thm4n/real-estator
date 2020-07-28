@@ -1,17 +1,21 @@
-﻿using System;
+﻿using RealEstator.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace RealEstator.Data
+namespace RealEstator.Data.Entities
+
 {
-    public class Home
+    [Table("Condo")]
+    public class Condo
     {
         [Key]
-        public int HomeID { get; set; }
+        public int CondoID { get; set; }
         [Required]
-        public string Address { get; set; } = string.Empty;
+        public string Address { get; set; }
         [Required]
         public int Beds { get; set; }
         [Required]
@@ -28,6 +32,9 @@ namespace RealEstator.Data
         public int YearBuilt { get; set; }
         [Required]
         public int Price { get; set; }
-        public int CondoID { get; internal set; }
+
+        [ForeignKey("Request")]
+        public int RequestID { get; set; }
+        public virtual Request Request { get; set; }
     }
 }

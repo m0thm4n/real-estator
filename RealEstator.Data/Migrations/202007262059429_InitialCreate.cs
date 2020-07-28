@@ -1,4 +1,4 @@
-namespace RealEstator.Migrations
+﻿namespace RealEstator.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -8,7 +8,7 @@ namespace RealEstator.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Condoes",
+                "dbo.Condo",
                 c => new
                     {
                         CondoID = c.Int(nullable: false, identity: true),
@@ -21,11 +21,25 @@ namespace RealEstator.Migrations
                         Occupied = c.Boolean(nullable: false),
                         YearBuilt = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
+                        RequestID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.CondoID);
+                .PrimaryKey(t => t.CondoID)
+                .ForeignKey("dbo.Request", t => t.RequestID, cascadeDelete: true)
+                .Index(t => t.RequestID);
             
             CreateTable(
-                "dbo.Homes",
+                "dbo.Request",
+                c => new
+                    {
+                        RequestID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Address = c.String(nullable: false),
+                        Issue = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.RequestID);
+            
+            CreateTable(
+                "dbo.Home",
                 c => new
                     {
                         HomeID = c.Int(nullable: false, identity: true),
@@ -38,20 +52,11 @@ namespace RealEstator.Migrations
                         Occupied = c.Boolean(nullable: false),
                         YearBuilt = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
-                        CondoID = c.Int(nullable: false),
+                        RequestID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.HomeID);
-            
-            CreateTable(
-                "dbo.Requests",
-                c => new
-                    {
-                        RequestID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Address = c.String(),
-                        Issue = c.String(),
-                    })
-                .PrimaryKey(t => t.RequestID);
+                .PrimaryKey(t => t.HomeID)
+                .ForeignKey("dbo.Request", t => t.RequestID, cascadeDelete: true)
+                .Index(t => t.RequestID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -77,7 +82,7 @@ namespace RealEstator.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Townhouses",
+                "dbo.Townhouse",
                 c => new
                     {
                         TownhouseID = c.Int(nullable: false, identity: true),
@@ -90,8 +95,11 @@ namespace RealEstator.Migrations
                         Occupied = c.Boolean(nullable: false),
                         YearBuilt = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
+                        RequestID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.TownhouseID);
+                .PrimaryKey(t => t.TownhouseID)
+                .ForeignKey("dbo.Request", t => t.RequestID, cascadeDelete: true)
+                .Index(t => t.RequestID);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -145,22 +153,28 @@ namespace RealEstator.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Townhouse", "RequestID", "dbo.Request");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Home", "RequestID", "dbo.Request");
+            DropForeignKey("dbo.Condo", "RequestID", "dbo.Request");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.Townhouse", new[] { "RequestID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Home", new[] { "RequestID" });
+            DropIndex("dbo.Condo", new[] { "RequestID" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Townhouses");
+            DropTable("dbo.Townhouse");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Requests");
-            DropTable("dbo.Homes");
-            DropTable("dbo.Condoes");
+            DropTable("dbo.Home");
+            DropTable("dbo.Request");
+            DropTable("dbo.Condo");
         }
     }
 }
