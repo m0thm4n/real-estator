@@ -71,8 +71,6 @@ namespace RealEstator.Services
 
         public bool EditRequest(RequestEditModel requestToEdit)
         {
-            _db.Entry(requestToEdit).State = EntityState.Modified;
-
             var entity = _db.Request.Single(e => e.RequestID == requestToEdit.RequestID);
             if (entity != null)
             {

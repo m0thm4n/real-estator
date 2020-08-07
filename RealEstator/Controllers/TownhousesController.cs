@@ -22,7 +22,10 @@ namespace RealEstator.Controllers
         private readonly ITownhouseService _townhouseService = new TownhouseService();
         private GoogleMaps _google = new GoogleMaps();
 
-        public TownhousesController() { }
+        public TownhousesController()
+        {
+
+        }
         public TownhousesController(ITownhouseService townhouseService, ApplicationDbContext db, GoogleMaps google)
         {
             _townhouseService = townhouseService;

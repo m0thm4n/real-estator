@@ -87,8 +87,6 @@ namespace RealEstator.Services
 
         public bool EditCondo(CondoEditModel condoToEdit)
         {
-            _db.Entry(condoToEdit).State = EntityState.Modified;
-
             var entity = _db.Home.Single(e => e.HomeID == condoToEdit.CondoID);
             if (entity != null)
             {

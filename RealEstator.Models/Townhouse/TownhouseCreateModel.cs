@@ -1,4 +1,4 @@
-﻿namespace RealEstator.Services
+﻿namespace RealEstator.Models.Townhouse
 {
     public class TownhouseCreateModel
     {

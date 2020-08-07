@@ -23,6 +23,11 @@ namespace RealEstator.Controllers
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
         private GoogleMaps _google = new GoogleMaps();
 
+        public CondosController()
+        {
+
+        }
+
         public CondosController(ICondoService condoService, ApplicationDbContext db, GoogleMaps google)
         {
             _condoService = condoService;

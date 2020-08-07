@@ -129,12 +129,12 @@ namespace RealEstator.Controllers
         // GET: Homes/Delete/5
         public ActionResult Delete(int id)
         {
-            RequestDetailsModel home = _requestService.RequestDetails(id);
-            if (home == null)
+            RequestDetailsModel request = _requestService.RequestDetails(id);
+            if (request == null)
             {
                 return HttpNotFound();
             }
-            return View(home);
+            return View(request);
         }
 
         [Authorize(Roles = "Renter,Admin")]

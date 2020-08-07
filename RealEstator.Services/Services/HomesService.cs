@@ -87,8 +87,6 @@ namespace RealEstator.Services
 
         public bool EditHome(HomeEditModel homeToEdit)
         {
-            _db.Entry(homeToEdit).State = EntityState.Modified;
-
             var entity = _db.Home.Single(e => e.HomeID == homeToEdit.HomeID);
             if (entity != null)
             {
