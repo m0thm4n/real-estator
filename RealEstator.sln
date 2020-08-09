@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.Contracts", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.Config", "RealEstator.Config\RealEstator.Config.csproj", "{94F0F77F-E2D9-49BE-8728-01AC37C7C4C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstator.Zillow", "RealEstator.Zillow\RealEstator.Zillow.csproj", "{4AE25FD3-A17E-467C-BE6C-323FEE6D265D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{94F0F77F-E2D9-49BE-8728-01AC37C7C4C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F0F77F-E2D9-49BE-8728-01AC37C7C4C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F0F77F-E2D9-49BE-8728-01AC37C7C4C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE25FD3-A17E-467C-BE6C-323FEE6D265D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE25FD3-A17E-467C-BE6C-323FEE6D265D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE25FD3-A17E-467C-BE6C-323FEE6D265D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE25FD3-A17E-467C-BE6C-323FEE6D265D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

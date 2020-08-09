@@ -10,13 +10,20 @@ namespace RealEstator.Config
 {
     public static class GetConfig
     {
-        public static string LoadConfig()
+        public static List<Key> LoadConfig()
         {
-            using (StreamReader sr = new StreamReader(@"C:\workspace\csharp\real-estator\config.txt"))
+            using (StreamReader sr = new StreamReader(@"C:\workspace\csharp\real-estator\config.json"))
             {
-                string line = sr.ReadToEnd();
-                return line;
+                string json = sr.ReadToEnd();
+                List<Key> keys = JsonConvert.DeserializeObject<List<Key>>(json);
+                return keys;
             }
         }
+    }
+
+    public class Key
+    {
+        public string zillow;
+        public string google;
     }
 }
